@@ -14,10 +14,6 @@ public class ShootEmOut extends GameEngine implements IKeyInput {
 		PApplet.main("ShootEmOut");
 	}
 
-	public void setup() {
-
-	}
-
 	@Override
 	public void setupGame() {
 		// TODO Auto-generated method stub
