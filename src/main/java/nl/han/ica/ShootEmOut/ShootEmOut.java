@@ -1,39 +1,50 @@
 package nl.han.ica.ShootEmOut;
+import java.util.ArrayList;
+
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
-import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IKeyInput;
+import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
-//test 123
 @SuppressWarnings("serial")
-public class ShootEmOut extends GameEngine implements IKeyInput {
+public class ShootEmOut extends GameEngine {
 	
 	private Powerup[] powerup;
 	private Player player;
+	private ArrayList<Button> buttons = new ArrayList<Button>();
 	
 	public static void main(String[] args) {
-		PApplet.main("ShootEmOut");
+		PApplet.main("nl.han.ica.ShootEmOut.ShootEmOut");
 	}
 
 	@Override
 	public void setupGame() {
-		// TODO Auto-generated method stub
-		
+		createViewWithoutViewport(700, 800);
+		initButtons();
 	}
+	
+    private void createViewWithoutViewport(int screenWidth, int screenHeight) {
+        View view = new View(screenWidth,screenHeight);
+        view.setBackground(loadImage("src/main/java/nl/han/ica/ShootEmOut/media/bg.png"));
+
+        setView(view);
+        size(screenWidth, screenHeight);
+    }
+    
+    private void initButtons() {
+    	Button startButton = new Button(this, 300, 200, "Start");
+    	buttons.add(startButton);
+    	Button highscoreButton = new Button(this, 300, 400, "Highscore");
+    	buttons.add(highscoreButton);
+    	Button exitButton = new Button(this, 300, 600, "Afsluiten");
+    	buttons.add(exitButton);
+    	
+    	for(Button b : buttons) {
+    		addGameObject(b, b.getX(), b.getY());
+    	}
+    }
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(int keyCode, char key) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(int keyCode, char key) {
 		// TODO Auto-generated method stub
 		
 	}
