@@ -6,7 +6,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.TextObject;
 import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IMouseInput;
 
 public class Button extends SpriteObject implements IMouseInput {
-
+// KANKER
 	private ShootEmOut SEO;
 	private TextObject text;
 	private static Sprite sprite = new Sprite("src/main/java/nl/han/ica/ShootEmOut/media/shield.png");

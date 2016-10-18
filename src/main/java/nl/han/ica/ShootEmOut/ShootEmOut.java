@@ -7,7 +7,7 @@ import processing.core.PApplet;
 
 @SuppressWarnings("serial")
 public class ShootEmOut extends GameEngine {
-	
+	// KANKER
 	private Powerup[] powerup;
 	private Player player;
 	private ArrayList<Button> buttons = new ArrayList<Button>();

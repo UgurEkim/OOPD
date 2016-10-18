@@ -7,7 +7,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
 
 public class Player extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener { 
-
+	// KANKER
 	private float attackInterval;
 	private int attackAmount;
 	private int attackDamage;
