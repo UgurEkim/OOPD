@@ -1,4 +1,6 @@
-public class Score {
+import nl.han.ica.OOPDProcessingEngineHAN.Objects.TextObject;
+
+public class Score extends TextObject{
 
 	private int score;
 

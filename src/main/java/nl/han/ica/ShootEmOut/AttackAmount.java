@@ -4,6 +4,6 @@ public class AttackAmount extends Powerup {
 
 	public AttackAmount(float x, float y, long duration) {
 
-	}
+	}	
 
 }
