@@ -1,3 +1,4 @@
+package nl.han.ica.ShootEmOut;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.TextObject;
 
 public class Score extends TextObject{
