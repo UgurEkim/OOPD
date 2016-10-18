@@ -1,3 +1,5 @@
+package nl.han.ica.ShootEmOut;
+
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 
 public class ShootEmOut extends GameEngine{
