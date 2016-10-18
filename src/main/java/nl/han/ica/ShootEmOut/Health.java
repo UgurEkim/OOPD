@@ -1,3 +1,5 @@
+package nl.han.ica.ShootEmOut;
+
 public class Health {
 
 	private int bar;
