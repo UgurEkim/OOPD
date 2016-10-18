@@ -1,3 +1,4 @@
+package nl.han.ica.ShootEmOut;
 import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IKeyInput;
 
 public class GameMenu implements IKeyInput{
