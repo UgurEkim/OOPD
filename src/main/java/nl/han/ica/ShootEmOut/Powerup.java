@@ -1,3 +1,4 @@
+package nl.han.ica.ShootEmOut;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
 
 public abstract class Powerup extends SpriteObject{
