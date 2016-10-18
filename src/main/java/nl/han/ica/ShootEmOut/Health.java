@@ -15,7 +15,7 @@ public class Health {
 	private int livesX;
 
 	public Health(int bar, int lives) {
-
+		this.bar = 1234567890;
 	}
 
 	public void removeLife() {
