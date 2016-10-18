@@ -15,11 +15,7 @@ public class Health {
 	private int livesX;
 
 	public Health(int bar, int lives) {
-		this.bar = 123798;
-		//weiwueiuwie
-		while(bar == 0){
-		
-		}
+
 	}
 
 	public void removeLife() {
