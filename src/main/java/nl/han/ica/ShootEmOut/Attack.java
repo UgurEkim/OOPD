@@ -2,8 +2,6 @@ package nl.han.ica.ShootEmOut;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PGraphics;
 
-// je moeder
-
 public class Attack extends GameObject{
 
 	private int speed;
@@ -14,7 +12,7 @@ public class Attack extends GameObject{
 
 	}
 
-	@Overrides
+	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		
