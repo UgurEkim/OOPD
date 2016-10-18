@@ -5,7 +5,7 @@ import processing.core.PGraphics;
 public class Attack extends GameObject{
 
 	private int speed;
-
+	
 	private int direction;
 
 	public Attack(float x, float y, int speed, int direction) {
