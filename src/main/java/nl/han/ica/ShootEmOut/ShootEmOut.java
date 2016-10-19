@@ -12,8 +12,8 @@ public class ShootEmOut extends GameEngine {
 	private Powerup[] powerup;
 	private Player player;
 	private ArrayList<Button> buttons = new ArrayList<Button>();
-	private int screenWidth;
-	private int screenHeight;
+	protected int screenWidth;
+	protected int screenHeight;
 
 	public static void main(String[] args) {
 		PApplet.main("nl.han.ica.ShootEmOut.ShootEmOut");
@@ -38,11 +38,10 @@ public class ShootEmOut extends GameEngine {
 	private void initMenu() {
 		Button startButton = new Button(this, screenWidth / 2, 300, "Start");
 		buttons.add(startButton);
+		
 		Button highscoreButton = new Button(this, screenWidth / 2, 500, "Highscore");
 		buttons.add(highscoreButton);
-		Button exitButton = new Button(this, screenWidth / 2, 700, "Afsluiten");
-		buttons.add(exitButton);
-
+		
 		for (Button b : buttons) {
 			addGameObject(b, b.getX(), b.getY());
 		}
@@ -57,7 +56,7 @@ public class ShootEmOut extends GameEngine {
 				break;
 
 			case "Highscore":
-
+				
 				break;
 
 			default:

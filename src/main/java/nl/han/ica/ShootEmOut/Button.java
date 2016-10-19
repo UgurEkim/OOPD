@@ -16,6 +16,7 @@ public class Button extends GameObject {
 
 	@Override
 	public void update() {
+
 	}
 
 	public void draw(PGraphics g) {
@@ -41,7 +42,7 @@ public class Button extends GameObject {
 			SEO.removeMenu();
 		}
 	}
-	
+
 	public String getText() {
 		return text;
 	}
