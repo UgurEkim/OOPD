@@ -1,9 +1,12 @@
 package nl.han.ica.ShootEmOut;
 
+import java.util.List;
+
+import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PGraphics;
 
-public class Attack extends GameObject {
+public class Attack extends GameObject implements ICollidableWithGameObjects {
 
 	private int speed;
 	private int direction;
@@ -31,5 +34,16 @@ public class Attack extends GameObject {
 		g.fill(0, 0, 255);
 		g.ellipse(getX() + 32, getY(), 10, 10);
 	}
+	
+	@Override
+	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+		for (GameObject g : collidedGameObjects) {
+            if (g instanceof Monster) {
+                SEO.deleteGameObject(g);
+                SEO.deleteGameObject(this);
+            }
+        }
+	}
+
 
 }

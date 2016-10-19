@@ -31,7 +31,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		this.setWidth(40);
 		this.setHeight(64);
 		this.SEO = SEO;
-		this.attackInterval = 0.01;
+		this.attackInterval = 0.33F;
 		this.speed = 7;
 		resetAlarm();
 	}
