@@ -6,10 +6,13 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 
 public class Slime extends Monster {
 
-	private Monster monster;
-
-	public Slime(float x) {
-
+	public Slime(ShootEmOut SEO) {
+		super("src/main/java/nl/han/ica/ShootEmOut/media/slime.png", SEO);
+		this.setySpeed(1);
+		this.setHeight(64);
+		this.setWidth(64);
+		
+		setxPosition();
 	}
 
 	@Override

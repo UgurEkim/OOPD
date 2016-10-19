@@ -1,16 +1,21 @@
 package nl.han.ica.ShootEmOut;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
+import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
 @SuppressWarnings("serial")
-public class ShootEmOut extends GameEngine {
+public class ShootEmOut extends GameEngine implements IAlarmListener {
 
+	private Alarm monsterAlarm;
 	private Powerup[] powerup;
 	private Player player;
+	private ArrayList<Monster> monsters = new ArrayList<Monster>(); 
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 	private int screenWidth;
 	private int screenHeight;
@@ -54,6 +59,7 @@ public class ShootEmOut extends GameEngine {
 			case "Start":
 				player = new Player(this, screenWidth / 2 - 32);
 				addGameObject(player);
+				monsterSpawner();
 				break;
 
 			case "Highscore":
@@ -70,8 +76,44 @@ public class ShootEmOut extends GameEngine {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		
+	}
 
+	public void monsterSpawner(){
+		Random random =  new Random();
+		this.monsterAlarm = new Alarm("Monster", random.nextInt(3) + 1);
+		monsterAlarm.addTarget(this);
+		monsterAlarm.start();
+	}
+	
+	@Override
+	public void triggerAlarm(String alarmName) {
+		if(alarmName == "Monster"){
+			Random random = new Random();
+			int monsterNumber = random.nextInt(4);
+			Monster m;
+			
+			switch(monsterNumber){
+			case 0:
+				m = new Slime(this);
+				monsters.add(m);
+				addGameObject(m);
+				break;
+			case 1:
+				m = new Skeleton(this);
+				monsters.add(m);
+				addGameObject(m);
+				break;
+			default:
+				m = new Rat(this);
+				monsters.add(m);
+				addGameObject(m);
+				break;
+			}
+			
+			monsterSpawner();
+		}
+		
 	}
 
 }

@@ -1,11 +1,16 @@
 package nl.han.ica.ShootEmOut;
+import java.util.Random;
+
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
+import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
 
 public abstract class Monster extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener{
 
 	protected int speed;
+	
+	protected ShootEmOut SEO;
 
 	protected double attackInterval;
 
@@ -17,12 +22,23 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 
 	private Health health;
 
-	public Monster(float x) {
-		
+	public Monster(String fileName, ShootEmOut SEO) {
+		super(new Sprite(fileName));
+		this.SEO = SEO;		
+		this.setY(-50);
 	}
 
 	public void attack() {
 
+	}
+	
+	public void setxPosition(){
+		Random random = new Random();
+		float spawnX = random.nextInt(SEO.getWidth()); 
+		if(spawnX > SEO.getWidth() - this.width){
+			spawnX = SEO.getWidth() - this.width;
+		}
+		this.setX(spawnX);
 	}
 
 }

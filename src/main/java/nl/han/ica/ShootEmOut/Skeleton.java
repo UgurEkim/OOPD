@@ -6,8 +6,13 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 
 public class Skeleton extends Monster {
 
-	public Skeleton(float x) {
-
+	public Skeleton(ShootEmOut SEO) {
+		super("src/main/java/nl/han/ica/ShootEmOut/media/skeleton.png", SEO);
+		this.setySpeed(2);
+		this.setHeight(64);
+		this.setWidth(64);
+		
+		setxPosition();
 	}
 
 	@Override
