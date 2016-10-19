@@ -30,14 +30,15 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		this.setY(700);
 		this.setWidth(64);
 		this.SEO = SEO;
-		this.attackInterval = 1.0;
-		this.speed = 6;
+		this.attackInterval = 0.33;
+		this.speed = 7;
 		resetAlarm();
-		setFriction(0F);
 	}
 
 	public void attack() {
 		canShoot = false; 
+		Attack attack = new Attack(getX(), getY(), 7, 0);
+		
     	System.out.println("pew");
 	}
 
