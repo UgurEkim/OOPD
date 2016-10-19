@@ -8,6 +8,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
+import processing.core.PGraphics;
 
 public class Player extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener {
 	private Alarm alarm;
@@ -27,13 +28,14 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	public Player(ShootEmOut SEO, float x) {
 		super(new Sprite("src/main/java/nl/han/ica/ShootEmOut/media/player.png"));
 		this.setX(x);
-		this.setY(700);
+		this.setY(650);
 		this.setWidth(52);
 		this.setHeight(64);
 		this.SEO = SEO;
-		this.attackInterval = 0.33;
+		this.attackInterval = 0.3;
 		this.speed = 10;
-		health = new Health(10, 3, this);
+		health = new Health(5, 3, this);
+		SEO.addGameObject(health);
 		resetAlarm();
 	}
 
@@ -108,6 +110,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		for (GameObject g : collidedGameObjects) {
             if (g instanceof Monster) {
                 SEO.deleteGameObject(g);
+                health.removeBar();
             }
         }
 	}
@@ -117,5 +120,4 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		canShoot = true;
 		resetAlarm();
 	}
-
 }

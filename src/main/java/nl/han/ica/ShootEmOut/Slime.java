@@ -11,7 +11,7 @@ public class Slime extends Monster {
 		this.setySpeed(1);
 		this.setHeight(64);
 		this.setWidth(58);
-		this.health = new Health(5, this);
+		this.health = 5;
 		
 		setxPosition();
 	}
@@ -33,5 +33,4 @@ public class Slime extends Monster {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

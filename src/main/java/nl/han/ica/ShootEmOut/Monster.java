@@ -7,22 +7,16 @@ import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
+import processing.core.PGraphics;
 
 public abstract class Monster extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener {
-
+	protected int health;
 	protected int speed;
-
 	public ShootEmOut SEO;
-
 	protected double attackInterval;
-
 	protected int attackAmount;
-
 	protected int scoreValue;
-
 	protected int attackDamage;
-
-	public Health health;
 
 	public Monster(String fileName, ShootEmOut SEO) {
 		super(new Sprite(fileName));
@@ -43,9 +37,15 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 		this.setX(spawnX);
 	}
 	
+	public void removeHealth(){
+		health -= 1;
+		if(health == 0){
+			SEO.deleteGameObject(this);
+		}
+	}
+	
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		
 	}
-
 }

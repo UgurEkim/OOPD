@@ -39,7 +39,7 @@ public class Button extends GameObject {
 	@Override
 	public void mouseClicked(int x, int y, int button) {
 		if (isMuisBinnen(x, y) && button == SEO.LEFT) {
-			SEO.removeMenu();
+			SEO.removeMenu(this);
 		}
 	}
 
