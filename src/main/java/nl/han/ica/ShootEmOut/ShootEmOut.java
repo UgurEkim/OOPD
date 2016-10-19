@@ -14,8 +14,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	private Alarm monsterAlarm;
 	private Powerup[] powerup;
-	private Player player;
-	private ArrayList<Monster> monsters = new ArrayList<Monster>(); 
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 	protected int screenWidth;
 	protected int screenHeight;
@@ -56,8 +54,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		for (Button b : buttons) {
 			switch (b.getText()) {
 			case "Start":
-				player = new Player(this, screenWidth / 2 - 32);
-				addGameObject(player);
+				addGameObject(new Player(this, screenWidth / 2 - 32));
 				monsterSpawner();
 				break;
 
@@ -95,17 +92,14 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 			switch(monsterNumber){
 			case 0:
 				m = new Slime(this);
-				monsters.add(m);
 				addGameObject(m);
 				break;
 			case 1:
 				m = new Skeleton(this);
-				monsters.add(m);
 				addGameObject(m);
 				break;
 			default:
 				m = new Rat(this);
-				monsters.add(m);
 				addGameObject(m);
 				break;
 			}

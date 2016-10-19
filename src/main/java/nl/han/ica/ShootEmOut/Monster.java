@@ -1,10 +1,13 @@
 package nl.han.ica.ShootEmOut;
+import java.util.List;
 import java.util.Random;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
+import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
+import nl.han.ica.waterworld.Swordfish;
 
 public abstract class Monster extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener{
 
@@ -39,6 +42,11 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 			spawnX = SEO.getWidth() - this.width;
 		}
 		this.setX(spawnX);
+	}
+	
+	@Override
+	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+		
 	}
 
 }

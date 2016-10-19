@@ -28,7 +28,8 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		super(new Sprite("src/main/java/nl/han/ica/ShootEmOut/media/player.png"));
 		this.setX(x);
 		this.setY(700);
-		this.setWidth(64);
+		this.setWidth(40);
+		this.setHeight(64);
 		this.SEO = SEO;
 		this.attackInterval = 0.33;
 		this.speed = 7;
@@ -113,8 +114,11 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-		// TODO Auto-generated method stub
-
+		for (GameObject g : collidedGameObjects) {
+            if (g instanceof Monster) {
+                SEO.deleteGameObject(g);
+            }
+        }
 	}
 
 	@Override
