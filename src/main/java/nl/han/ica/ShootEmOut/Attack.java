@@ -39,7 +39,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject g : collidedGameObjects) {
             if (g instanceof Monster) {
-                SEO.deleteGameObject(g);
+                ((Monster) g).health.removeBar();
                 SEO.deleteGameObject(this);
             }
         }

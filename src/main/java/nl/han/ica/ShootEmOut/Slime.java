@@ -11,6 +11,7 @@ public class Slime extends Monster {
 		this.setySpeed(1);
 		this.setHeight(64);
 		this.setWidth(58);
+		this.health = new Health(5, this);
 		
 		setxPosition();
 	}

@@ -17,7 +17,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	private int attackDamage;
 	private Health health;
 	private Powerup[] powerup;
-	private ShootEmOut SEO;
+	public ShootEmOut SEO;
 
 	private boolean canShoot;
 	private boolean leftKey;
@@ -32,7 +32,8 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		this.setHeight(64);
 		this.SEO = SEO;
 		this.attackInterval = 0.33;
-		this.speed = 20;
+		this.speed = 10;
+		health = new Health(10, 3, this);
 		resetAlarm();
 	}
 

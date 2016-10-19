@@ -11,6 +11,7 @@ public class Skeleton extends Monster {
 		this.setySpeed(2);
 		this.setHeight(64);
 		this.setWidth(64);
+		this.health = new Health(3, this);
 		
 		setxPosition();
 	}

@@ -12,7 +12,7 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 
 	protected int speed;
 
-	protected ShootEmOut SEO;
+	public ShootEmOut SEO;
 
 	protected double attackInterval;
 
@@ -22,7 +22,7 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 
 	protected int attackDamage;
 
-	private Health health;
+	public Health health;
 
 	public Monster(String fileName, ShootEmOut SEO) {
 		super(new Sprite(fileName));
