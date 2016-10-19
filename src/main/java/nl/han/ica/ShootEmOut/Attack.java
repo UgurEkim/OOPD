@@ -1,28 +1,35 @@
 package nl.han.ica.ShootEmOut;
+
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PGraphics;
 
-public class Attack extends GameObject{
+public class Attack extends GameObject {
 
 	private int speed;
 	private int direction;
+	private ShootEmOut SEO;
 
-	public Attack(float x, float y, int speed, int direction) {
+	public Attack(ShootEmOut SEO, float x, float y, int speed, int direction) {
 		super(x, y, 10, 10);
+		this.SEO = SEO;
 		this.speed = speed;
 		this.direction = direction;
+		setDirectionSpeed(direction, speed);
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		if (this.getY() <= 0) {
+			SEO.deleteGameObject(this);
+		}
 	}
 
 	@Override
 	public void draw(PGraphics g) {
-		// TODO Auto-generated method stub
-		
+		g.ellipseMode(g.CENTER);
+		g.stroke(0, 0, 200);
+		g.fill(0, 0, 255);
+		g.ellipse(getX() + 32, getY(), 10, 10);
 	}
 
 }
