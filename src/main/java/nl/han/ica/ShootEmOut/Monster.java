@@ -30,10 +30,6 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 		this.setY(-50);
 	}
 
-	public void attack() {
-
-	}
-
 	public void setxPosition() {
 		Random random = new Random();
 		float spawnX = random.nextInt(SEO.getWidth());
@@ -47,5 +43,7 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		
 	}
+	
+	public abstract void stopAlarm();
 
 }
