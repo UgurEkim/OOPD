@@ -37,8 +37,8 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 	public void setxPosition() {
 		Random random = new Random();
 		float spawnX = random.nextInt(SEO.getWidth());
-		if (spawnX > SEO.getWidth() - this.width) {
-			spawnX = SEO.getWidth() - this.width;
+		if (spawnX > SEO.getWidth() - this.width * 2) {
+			spawnX = SEO.getWidth() - this.width * 2;
 		}
 		this.setX(spawnX);
 	}

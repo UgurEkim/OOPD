@@ -10,7 +10,7 @@ public class Slime extends Monster {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/slime.png", SEO);
 		this.setySpeed(1);
 		this.setHeight(64);
-		this.setWidth(64);
+		this.setWidth(58);
 		
 		setxPosition();
 	}

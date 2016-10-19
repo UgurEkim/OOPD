@@ -32,7 +32,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		g.ellipseMode(g.CENTER);
 		g.stroke(0, 0, 200);
 		g.fill(0, 0, 255);
-		g.ellipse(getX() + 32, getY(), 10, 10);
+		g.ellipse(getX() + 32, getY(), this.width, this.height);
 	}
 	
 	@Override

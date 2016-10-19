@@ -76,7 +76,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	public void monsterSpawner() {
 		Random random = new Random();
-		this.monsterAlarm = new Alarm("Monster", random.nextInt(3) + 1);
+		this.monsterAlarm = new Alarm("Monster", random.nextDouble() * 3);
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}
