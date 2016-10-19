@@ -13,7 +13,6 @@ import processing.core.PApplet;
 public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	private Alarm monsterAlarm;
-	private Powerup[] powerup;
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 	protected int screenWidth;
 	protected int screenHeight;
@@ -41,10 +40,10 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	private void initMenu() {
 		Button startButton = new Button(this, screenWidth / 2, 300, "Start");
 		buttons.add(startButton);
-		
+
 		Button highscoreButton = new Button(this, screenWidth / 2, 500, "Highscore");
 		buttons.add(highscoreButton);
-		
+
 		for (Button b : buttons) {
 			addGameObject(b, b.getX(), b.getY());
 		}
@@ -59,7 +58,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 				break;
 
 			case "Highscore":
-				
+
 				break;
 
 			default:
@@ -72,24 +71,24 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	@Override
 	public void update() {
-		
+
 	}
 
-	public void monsterSpawner(){
-		Random random =  new Random();
+	public void monsterSpawner() {
+		Random random = new Random();
 		this.monsterAlarm = new Alarm("Monster", random.nextInt(3) + 1);
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}
-	
+
 	@Override
 	public void triggerAlarm(String alarmName) {
-		if(alarmName == "Monster"){
+		if (alarmName == "Monster") {
 			Random random = new Random();
 			int monsterNumber = random.nextInt(4);
 			Monster m;
-			
-			switch(monsterNumber){
+
+			switch (monsterNumber) {
 			case 0:
 				m = new Slime(this);
 				addGameObject(m);
@@ -103,10 +102,10 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 				addGameObject(m);
 				break;
 			}
-			
+
 			monsterSpawner();
 		}
-		
+
 	}
 
 }
