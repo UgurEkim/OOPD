@@ -33,4 +33,10 @@ public class Slime extends Monster {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void stopAlarm() {
+		// TODO Auto-generated method stub
+		
+	}
 }

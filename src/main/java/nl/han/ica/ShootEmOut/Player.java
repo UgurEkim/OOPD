@@ -41,7 +41,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 
 	public void attack() {
 		canShoot = false;
-		Attack attack = new Attack(SEO, getX(), getY(), 7, 0);
+		Attack attack = new Attack(SEO, true, getX(), getY(), 7, 0);
 		SEO.addGameObject(attack);
 	}
 
@@ -104,13 +104,17 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		alarm.addTarget(this);
 		alarm.start();
 	}
+	
+	public void removeHealth(){
+		health.removeBar();
+	}
 
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject g : collidedGameObjects) {
             if (g instanceof Monster) {
                 SEO.deleteGameObject(g);
-                health.removeBar();
+                removeHealth();
             }
         }
 	}
@@ -120,4 +124,5 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		canShoot = true;
 		resetAlarm();
 	}
+
 }
