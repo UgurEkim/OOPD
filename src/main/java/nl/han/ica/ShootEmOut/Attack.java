@@ -22,10 +22,9 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		this.direction = direction;
 		setDirectionSpeed(direction, speed);
 	}
-	
-	public Attack(ShootEmOut SEO, Monster monster, float x, float y, int speed, int direction) {
-		super(x, y, 10, 10);
-		this.monster = monster;
+
+	public Attack(ShootEmOut SEO, float x, float y, int speed, int direction) {
+		super(x + 18, y, 10, 10);
 		this.SEO = SEO;
 		this.speed = speed;
 		this.direction = direction;
@@ -41,25 +40,24 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 
 	@Override
 	public void draw(PGraphics g) {
-		g.ellipseMode(g.CENTER);
+		g.ellipseMode(g.CORNER);
 		g.stroke(0, 0, 200);
 		g.fill(0, 0, 255);
-		g.ellipse(getX() + 32, getY(), 10, 10);
+		g.ellipse(getX(), getY(), this.width, this.height);
 	}
-	
+
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject g : collidedGameObjects) {
-            if (g instanceof Monster && player) {
-                SEO.deleteGameObject(g);
-                SEO.deleteGameObject(this);
-            }
-            else if (g instanceof Player && !player) {
-            	SEO.deleteGameObject(this);
-            	System.out.println("Ouw je hebt mij geraakt");
-            }
-        }
-	}
 
+			if (g instanceof Monster && player) {
+				SEO.deleteGameObject(this);
+				((Monster) g).removeHealth();
+			} else if (g instanceof Player && !player) {
+				SEO.deleteGameObject(this);
+				((Player) g).removeHealth();
+			}
+		}
+	}
 
 }

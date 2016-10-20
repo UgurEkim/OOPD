@@ -49,22 +49,23 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		}
 	}
 
-	protected void removeMenu() {
-		for (Button b : buttons) {
-			switch (b.getText()) {
-			case "Start":
-				addGameObject(new Player(this, screenWidth / 2 - 32));
-				monsterSpawner();
-				break;
+	protected void removeMenu(Button buttonClicked) {
+		switch (buttonClicked.getText()) {
+		case "Start":
+			addGameObject(new Player(this, screenWidth / 2 - 26));
+			monsterSpawner();
+			break;
 
-			case "Highscore":
+		case "Highscore":
 
-				break;
+			break;
 
-			default:
-				break;
+		default:
+			break;
 
-			}
+		}
+		
+		for(Button b : buttons){
 			deleteGameObject(b);
 		}
 	}
@@ -76,7 +77,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	public void monsterSpawner() {
 		Random random = new Random();
-		this.monsterAlarm = new Alarm("Monster", random.nextInt(3) + 1);
+		this.monsterAlarm = new Alarm("Monster", random.nextDouble() * 4); //maak een variabele van 4 zodat monsters sneller kunnen spawnen
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}

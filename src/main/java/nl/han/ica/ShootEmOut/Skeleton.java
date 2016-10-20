@@ -18,12 +18,13 @@ public class Skeleton extends Monster implements IAlarmListener {
 		this.setWidth(64);
 		this.attackInterval = 1.00;
 		resetAlarm();
+		this.health = 3;
 		setxPosition();
 	}
 	
 
 	public void attack() {
-		Attack attack = new Attack(SEO, this, getX(), getY(), 7, 180);
+		Attack attack = new Attack(SEO, getX(), getY(), 7, 180);
 		SEO.addGameObject(attack);
 	}
 
