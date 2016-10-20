@@ -100,6 +100,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 				break;
 			default:
 				m = new Rat(this);
+				
 				addGameObject(m);
 				break;
 			}
