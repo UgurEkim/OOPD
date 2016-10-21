@@ -13,7 +13,6 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 	private int direction;
 	private ShootEmOut SEO;
 	private boolean player;
-	private Monster monster;
 	private int[] color = new int[3];
 
 	public Attack(ShootEmOut SEO, boolean player, float x, float y, int speed, int direction, int size) {
