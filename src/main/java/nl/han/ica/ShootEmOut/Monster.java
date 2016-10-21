@@ -33,6 +33,7 @@ public abstract class Monster extends SpriteObject {
 		health -= 1;
 		if (health == 0) {
 			kill();
+			SEO.addScore(100);
 		}
 	}
 

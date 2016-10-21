@@ -1,26 +1,24 @@
 package nl.han.ica.ShootEmOut;
-import nl.han.ica.OOPDProcessingEngineHAN.Objects.TextObject;
 
-public class Score extends TextObject{
+public class Score {
 
 	private int score;
-
 	private String name;
 
-	public Score() {
-
+	public Score(String name) {
+		this.name = name;
+		this.score = 0;
 	}
 
 	public void addScore(int value) {
-
+		score += value;
 	}
 
 	public String toString() {
-		return null;
+		return name + ": " + score;
 	}
-
-	public void addName() {
-
+	
+	public int getScore() {
+		return score;
 	}
-
 }

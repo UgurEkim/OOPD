@@ -5,7 +5,11 @@ import java.util.Random;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
+import nl.han.ica.OOPDProcessingEngineHAN.Dashboard.Dashboard;
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
+import nl.han.ica.OOPDProcessingEngineHAN.Objects.TextObject;
+import nl.han.ica.OOPDProcessingEngineHAN.Persistence.FilePersistence;
+import nl.han.ica.OOPDProcessingEngineHAN.Persistence.IPersistence;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
@@ -13,7 +17,11 @@ import processing.core.PApplet;
 public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	private Alarm monsterAlarm;
-	private ArrayList<Button> buttons = new ArrayList<Button>();
+	private ArrayList<Button> buttons;
+	private TextObject scoreDashboard;
+	private ArrayList<Score> scores;
+	private IPersistence persistence;
+	private int score;
 	protected int screenWidth;
 	protected int screenHeight;
 
@@ -25,8 +33,20 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	public void setupGame() {
 		screenWidth = 700;
 		screenHeight = 800;
+		score = 0;
+		buttons = new ArrayList<Button>();
+		scores = new ArrayList<Score>();
+        persistence = new FilePersistence("main/java/nl/han/ica/waterworld/media/highscore.txt");
 		createView();
 		initMenu();
+	}
+	
+	private void createDashboard(int width, int height) {
+		Dashboard dashboard = new Dashboard(250, 20, width, height);
+		scoreDashboard = new TextObject("Score: 0", 24);
+		scoreDashboard.setForeColor(255, 255, 255, 255);
+		dashboard.addGameObject(scoreDashboard);
+		addGameObject(dashboard);
 	}
 
 	private void createView() {
@@ -54,6 +74,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		case "Start":
 			addGameObject(new Player(this, screenWidth / 2 - 26));
 			monsterSpawner();
+			createDashboard(screenWidth, 100);
 			break;
 
 		case "Highscore":
@@ -95,11 +116,9 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 				break;
 			default:
 				m = new Rat(this);
-				
 				addGameObject(m);
 				break;
 			}
-
 			monsterSpawner();
 		}
 	}
@@ -108,5 +127,10 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	@Override
 	public void update() {
 
+	}
+	
+	public void addScore(int value) {
+		this.score = this.score + value;
+		scoreDashboard.setText("Score: " + score);
 	}
 }
