@@ -7,31 +7,26 @@ import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 
 public class Skeleton extends Monster implements IAlarmListener {
-	
+
 	private Alarm alarm;
-	private double attackInterval;
-	
+	private int[] attackColor = { 255, 255, 255 };
+
 	public Skeleton(ShootEmOut SEO) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/skeleton.png", SEO);
 		this.setySpeed(2);
 		this.setHeight(64);
 		this.setWidth(64);
-		this.attackInterval = 1.00;
+		this.attackInterval = 1.50;
 		resetAlarm();
 		this.health = 3;
 		setxPosition();
 	}
-	
 
 	public void attack() {
-		Attack attack = new Attack(SEO, getX(), getY(), 7, 180);
+		Attack attack = new Attack(SEO, attackColor, getX() + 26, getY() + 64, 4, 165);
+		Attack attack2 = new Attack(SEO, attackColor, getX() + 26, getY() + 64, 4, 195);
 		SEO.addGameObject(attack);
-	}
-
-	@Override
-	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-		// TODO Auto-generated method stub
-		
+		SEO.addGameObject(attack2);
 	}
 
 	@Override
@@ -45,16 +40,9 @@ public class Skeleton extends Monster implements IAlarmListener {
 		alarm.addTarget(this);
 		alarm.start();
 	}
-	
+
 	public void stopAlarm() {
 		alarm.stop();
-	}
-
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -1,10 +1,13 @@
 package nl.han.ica.ShootEmOut;
 
-import java.util.List;
-
+import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
+import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 
-public class Slime extends Monster {
+public class Slime extends Monster implements IAlarmListener {
+
+	private Alarm alarm;
+	private int[] attackColor = { 0, 0, 255 };
 
 	public Slime(ShootEmOut SEO) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/slime.png", SEO);
@@ -12,31 +15,31 @@ public class Slime extends Monster {
 		this.setHeight(64);
 		this.setWidth(58);
 		this.health = 5;
-		
+
+		this.attackInterval = 2.00;
+		resetAlarm();
 		setxPosition();
+
 	}
 
-	@Override
-	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-		// TODO Auto-generated method stub
-		
+	public void attack() {
+		Attack attack = new Attack(SEO, attackColor, getX() + 26, getY() + 64, 6, 180);
+		SEO.addGameObject(attack);
 	}
 
 	@Override
 	public void triggerAlarm(String alarmName) {
-		// TODO Auto-generated method stub
-		
+		attack();
+		resetAlarm();
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
+	private void resetAlarm() {
+		this.alarm = new Alarm("SlimeAttack", attackInterval);
+		alarm.addTarget(this);
+		alarm.start();
 	}
 
-	@Override
 	public void stopAlarm() {
-		// TODO Auto-generated method stub
-		
+		alarm.stop();
 	}
 }

@@ -13,19 +13,24 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 	private ShootEmOut SEO;
 	private boolean player;
 	private Monster monster;
+	private int[] color = new int[3];
 
 	public Attack(ShootEmOut SEO, boolean player, float x, float y, int speed, int direction) {
-		super(x, y, 10, 10);
+		super(x + 21, y, 10, 10);
 		this.player = player;
 		this.SEO = SEO;
 		this.speed = speed;
 		this.direction = direction;
 		setDirectionSpeed(direction, speed);
+		this.color[0] = 255;
+		this.color[1] = 255;
+		this.color[2] = 0;
 	}
 
-	public Attack(ShootEmOut SEO, float x, float y, int speed, int direction) {
-		super(x + 18, y, 10, 10);
+	public Attack(ShootEmOut SEO, int[] rgb, float x, float y, int speed, int direction) {
+		super(x, y, 10, 10);
 		this.SEO = SEO;
+		this.color = rgb;
 		this.speed = speed;
 		this.direction = direction;
 		setDirectionSpeed(direction, speed);
@@ -42,18 +47,18 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 	public void draw(PGraphics g) {
 		g.ellipseMode(g.CORNER);
 		g.stroke(0, 0, 200);
-		g.fill(0, 0, 255);
+		g.fill(color[0], color[1], color[2]);
 		g.ellipse(getX(), getY(), this.width, this.height);
 	}
 
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject g : collidedGameObjects) {
-
 			if (g instanceof Monster && player) {
 				SEO.deleteGameObject(this);
 				((Monster) g).removeHealth();
-			} else if (g instanceof Player && !player) {
+			}
+			if (g instanceof Player && !player) {
 				SEO.deleteGameObject(this);
 				((Player) g).removeHealth();
 			}

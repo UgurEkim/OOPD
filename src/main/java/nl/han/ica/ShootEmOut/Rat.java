@@ -1,4 +1,5 @@
 package nl.han.ica.ShootEmOut;
+
 import java.util.List;
 import java.util.Random;
 
@@ -8,28 +9,10 @@ public class Rat extends Monster {
 
 	public Rat(ShootEmOut SEO) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/rat.png", SEO);
-		this.setySpeed(3);
+		this.setySpeed(5);
 		this.setHeight(32);
 		this.setWidth(20);
 		this.health = 1;
 		setxPosition();
 	}
-
-	@Override
-	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-		
-	}
-
-	@Override
-	public void triggerAlarm(String alarmName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

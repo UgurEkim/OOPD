@@ -104,19 +104,19 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		alarm.addTarget(this);
 		alarm.start();
 	}
-	
-	public void removeHealth(){
+
+	public void removeHealth() {
 		health.removeBar();
 	}
 
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject g : collidedGameObjects) {
-            if (g instanceof Monster) {
-                SEO.deleteGameObject(g);
-                removeHealth();
-            }
-        }
+			if (g instanceof Monster) {
+				((Monster) g).kill();
+				removeHealth();
+			}
+		}
 	}
 
 	@Override

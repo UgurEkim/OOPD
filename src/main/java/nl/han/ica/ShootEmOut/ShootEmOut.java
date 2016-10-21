@@ -64,8 +64,8 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 			break;
 
 		}
-		
-		for(Button b : buttons){
+
+		for (Button b : buttons) {
 			deleteGameObject(b);
 		}
 	}
@@ -77,7 +77,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	public void monsterSpawner() {
 		Random random = new Random();
-		this.monsterAlarm = new Alarm("Monster", random.nextDouble() * 4); //maak een variabele van 4 zodat monsters sneller kunnen spawnen
+		this.monsterAlarm = new Alarm("Monster", random.nextDouble() * 3);
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}

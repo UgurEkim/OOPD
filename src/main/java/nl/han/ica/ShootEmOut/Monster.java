@@ -1,15 +1,11 @@
 package nl.han.ica.ShootEmOut;
-import java.util.List;
+
 import java.util.Random;
 
-import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
-import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
-import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
-import processing.core.PGraphics;
 
-public abstract class Monster extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener {
+public abstract class Monster extends SpriteObject {
 	protected int health;
 	protected int speed;
 	public ShootEmOut SEO;
@@ -32,18 +28,28 @@ public abstract class Monster extends SpriteObject implements ICollidableWithGam
 		}
 		this.setX(spawnX);
 	}
-	
-	public void removeHealth(){
+
+	public void removeHealth() {
 		health -= 1;
-		if(health == 0){
-			SEO.deleteGameObject(this);
+		if (health == 0) {
+			kill();
 		}
 	}
-	
-	@Override
-	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 
+	public void kill() {
+		SEO.deleteGameObject(this);
+		if (this instanceof Skeleton) {
+			((Skeleton) this).stopAlarm();
+		}
+		if (this instanceof Slime) {
+			((Slime) this).stopAlarm();
+		}
 	}
-	
-	public abstract void stopAlarm();
+
+	@Override
+	public void update() {
+		if (this.getY() >= SEO.screenHeight) {
+			kill();
+		}
+	}
 }
