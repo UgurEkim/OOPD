@@ -6,6 +6,7 @@ import java.util.Random;
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
+import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameThread;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
@@ -13,6 +14,9 @@ import processing.core.PApplet;
 public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	private Alarm monsterAlarm;
+	private Alarm levelTimeAlarm;
+	private int spawnSpeed;
+	private int level;
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 	protected int screenWidth;
 	protected int screenHeight;
@@ -48,12 +52,19 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 			addGameObject(b, b.getX(), b.getY());
 		}
 	}
+	
+	public int getLevel(){
+		return level;
+	}
 
 	protected void removeMenu(Button buttonClicked) {
 		switch (buttonClicked.getText()) {
 		case "Start":
 			addGameObject(new Player(this, screenWidth / 2 - 26));
+			level = 1;
+			spawnSpeed = 1; 
 			monsterSpawner();
+			levelTimeAlarmReset();
 			break;
 
 		case "Highscore":
@@ -72,14 +83,25 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	@Override
 	public void update() {
-
+		
 	}
-
+	
 	public void monsterSpawner() {
 		Random random = new Random();
-		this.monsterAlarm = new Alarm("Monster", random.nextDouble() * 3);
+		this.monsterAlarm = new Alarm("Monster", random.nextDouble() * (3.0 / (spawnSpeed + level)));
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
+	}
+	
+	public void levelTimeAlarmReset(){
+		this.levelTimeAlarm = new Alarm("Time", 3); 
+		levelTimeAlarm.addTarget(this);
+		levelTimeAlarm.start();
+	}
+	
+	
+	public void spawnBoss(){
+		addGameObject(new Boss(this));
 	}
 
 	@Override
@@ -104,8 +126,21 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 				addGameObject(m);
 				break;
 			}
-
-			monsterSpawner();
+			
+			if(spawnSpeed < 5){
+				monsterSpawner();
+			}
+		}
+		
+		if(alarmName == "Time"){
+			spawnSpeed += 1;
+			System.out.println(spawnSpeed);
+			if(spawnSpeed >= 5){
+				spawnBoss();
+			}
+			else{
+				levelTimeAlarmReset();
+			}
 		}
 
 	}

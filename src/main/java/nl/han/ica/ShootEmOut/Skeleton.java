@@ -39,6 +39,7 @@ public class Skeleton extends Monster implements IAlarmListener {
 	}
 
 	public void stopAlarm() {
+		
 		alarm.stop();
 	}
 
