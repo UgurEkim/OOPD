@@ -38,13 +38,14 @@ public abstract class Monster extends SpriteObject {
 	}
 
 	public void kill() {
-		SEO.deleteGameObject(this);
 		if (this instanceof Skeleton) {
 			((Skeleton) this).stopAlarm();
 		}
 		if (this instanceof Slime) {
 			((Slime) this).stopAlarm();
 		}
+		
+		SEO.deleteGameObject(this);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package nl.han.ica.ShootEmOut;
 import java.util.List;
+import java.util.Random;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
@@ -22,12 +23,35 @@ public class Boss extends Monster implements IAlarmListener {
 
 
 	public void attack() {
-		Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 4, 165, 30);
-		Attack attack2 = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 4, 180, 30);
-		Attack attack3 = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 4, 195, 30);
-		SEO.addGameObject(attack);
-		SEO.addGameObject(attack2);
-		SEO.addGameObject(attack3);
+		Random r = new Random();
+		int number = r.nextInt(4);
+		
+		switch(number){
+		case 0:
+			for(int i = 0; i < 3; i++){
+				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 7, 165 + 15*i, 30);
+				SEO.addGameObject(attack);
+			}
+			break;
+		case 1:
+			for(int i = 0; i < 5; i++){
+				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 5, 180 + 15*i, 30);
+				SEO.addGameObject(attack);
+			}
+			break;
+		case 2: 
+			for(int i = 0; i < 5; i++){
+				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 5, 180 - 15*i, 30);
+				SEO.addGameObject(attack);
+			}
+			break;
+		case 3:
+			for(int i = 0; i < 24; i++){
+				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 3, 15*i, 30);
+				SEO.addGameObject(attack);
+			}
+			break;
+		}
 	}
 
 	@Override

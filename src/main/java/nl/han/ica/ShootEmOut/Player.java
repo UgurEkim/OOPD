@@ -29,8 +29,8 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		super(new Sprite("src/main/java/nl/han/ica/ShootEmOut/media/player.png"));
 		this.setX(x);
 		this.setY(650);
-		this.setWidth(52);
-		this.setHeight(64);
+		this.setWidth(44);
+		this.setHeight(58);
 		this.SEO = SEO;
 		this.attackInterval = 0.3 ;
 		this.speed = 8;
