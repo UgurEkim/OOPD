@@ -1,5 +1,4 @@
 package nl.han.ica.ShootEmOut;
-import java.util.List;
 import java.util.Random;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
@@ -24,7 +23,7 @@ public class Boss extends Monster implements IAlarmListener {
 
 	public void attack() {
 		Random r = new Random();
-		int number = r.nextInt(4);
+		int number = r.nextInt(4);	
 		
 		switch(number){
 		case 0:
