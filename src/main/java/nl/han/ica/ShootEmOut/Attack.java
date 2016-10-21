@@ -17,7 +17,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 	private int[] color = new int[3];
 
 	public Attack(ShootEmOut SEO, boolean player, float x, float y, int speed, int direction) {
-		super(x + 21, y, 10, 10);
+		super(x + 24, y, 10, 10);
 		this.player = player;
 		this.SEO = SEO;
 		this.speed = speed;
@@ -28,8 +28,8 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		this.color[2] = 0;
 	}
 
-	public Attack(ShootEmOut SEO, int[] rgb, float x, float y, int speed, int direction) {
-		super(x, y, 10, 10);
+	public Attack(ShootEmOut SEO, int[] rgb, float x, float y, int speed, int direction, int size) {
+		super(x, y, size, size);
 		this.SEO = SEO;
 		this.color = rgb;
 		this.speed = speed;
@@ -46,7 +46,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 
 	@Override
 	public void draw(PGraphics g) {
-		g.ellipseMode(PConstants.CORNER);
+		g.ellipseMode(PConstants.CENTER);
 		g.stroke(0, 0, 200);
 		g.fill(color[0], color[1], color[2]);
 		g.ellipse(getX(), getY(), this.width, this.height);

@@ -20,8 +20,8 @@ public class Skeleton extends Monster implements IAlarmListener {
 	}
 
 	public void attack() {
-		Attack attack = new Attack(SEO, attackColor, getX() + 26, getY() + 64, 4, 165);
-		Attack attack2 = new Attack(SEO, attackColor, getX() + 26, getY() + 64, 4, 195);
+		Attack attack = new Attack(SEO, attackColor, getX() + 30, getY() + 64, 4, 165, 10);
+		Attack attack2 = new Attack(SEO, attackColor, getX() + 30, getY() + 64, 4, 195, 10);
 		SEO.addGameObject(attack);
 		SEO.addGameObject(attack2);
 	}
