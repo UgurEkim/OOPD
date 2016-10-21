@@ -4,7 +4,7 @@ import java.util.Random;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
-
+//wtf
 public abstract class Monster extends SpriteObject {
 	protected int health;
 	protected int speed;

@@ -1,5 +1,5 @@
 package nl.han.ica.ShootEmOut;
-
+//wtf
 public class Score {
 
 	private int score;
