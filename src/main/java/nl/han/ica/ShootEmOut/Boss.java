@@ -17,10 +17,9 @@ public class Boss extends Monster implements IAlarmListener {
 		this.setWidth(166);
 		this.setX(SEO.getWidth() / 2 - this.width / 2);
 		this.setY(-300);
-		this.attackInterval = 2.00 / SEO.getLevel();
+		this.attackInterval = 0.50 / SEO.getLevel();
 		this.health = 50 * SEO.getLevel();
 	}
-
 
 	public void attack() {
 		Random r = new Random();
@@ -35,19 +34,19 @@ public class Boss extends Monster implements IAlarmListener {
 			break;
 		case 1:
 			for(int i = 0; i < 5; i++){
-				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 5, 180 + 15*i, 30);
+				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 5, 170 + 15*i, 30);
 				SEO.addGameObject(attack);
 			}
 			break;
 		case 2: 
 			for(int i = 0; i < 5; i++){
-				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 5, 180 - 15*i, 30);
+				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 5, 190 - 15*i, 30);
 				SEO.addGameObject(attack);
 			}
 			break;
 		case 3:
-			for(int i = 0; i < 24; i++){
-				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 3, 15*i, 30);
+			for(int i = 0; i < 20; i++){
+				Attack attack = new Attack(SEO, attackColor, getX() + this.getWidth() / 2, getY() + this.getHeight(), 3, 18*i, 30);
 				SEO.addGameObject(attack);
 			}
 			break;
