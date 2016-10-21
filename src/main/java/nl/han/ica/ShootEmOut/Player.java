@@ -8,7 +8,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
-import processing.core.PGraphics;
+import processing.core.PConstants;
 
 public class Player extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener {
 	private Alarm alarm;
@@ -51,10 +51,10 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 
 	@Override
 	public void keyPressed(int keyCode, char key) {
-		if (keyCode == SEO.LEFT) {
+		if (keyCode == PConstants.LEFT) {
 			leftKey = true;
 		}
-		if (keyCode == SEO.RIGHT) {
+		if (keyCode == PConstants.RIGHT) {
 			rightKey = true;
 		}
 		if (key == ' ') {
@@ -64,10 +64,10 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 
 	@Override
 	public void keyReleased(int keyCode, char key) {
-		if (keyCode == SEO.LEFT) {
+		if (keyCode == PConstants.LEFT) {
 			leftKey = false;
 		}
-		if (keyCode == SEO.RIGHT) {
+		if (keyCode == PConstants.RIGHT) {
 			rightKey = false;
 		}
 		if (key == ' ') {

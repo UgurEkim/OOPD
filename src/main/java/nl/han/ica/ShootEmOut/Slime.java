@@ -2,7 +2,6 @@ package nl.han.ica.ShootEmOut;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
-import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 
 public class Slime extends Monster implements IAlarmListener {
 

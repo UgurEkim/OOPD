@@ -1,10 +1,7 @@
 package nl.han.ica.ShootEmOut;
 
-import java.util.List;
-
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
-import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 
 public class Skeleton extends Monster implements IAlarmListener {
 

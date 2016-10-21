@@ -1,6 +1,7 @@
 package nl.han.ica.ShootEmOut;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
+import processing.core.PConstants;
 import processing.core.PGraphics;
 
 public class Button extends GameObject {
@@ -20,11 +21,11 @@ public class Button extends GameObject {
 	}
 
 	public void draw(PGraphics g) {
-		g.rectMode(SEO.CENTER);
+		g.rectMode(PConstants.CENTER);
 		g.fill(80, 200, 80);
 		g.rect(x, y, width, height);
 		g.fill(255);
-		g.textAlign(SEO.CENTER, SEO.CENTER);
+		g.textAlign(PConstants.CENTER, PConstants.CENTER);
 		g.textSize(40);
 		g.text(text, x, y);
 	}
@@ -38,7 +39,7 @@ public class Button extends GameObject {
 
 	@Override
 	public void mouseClicked(int x, int y, int button) {
-		if (isMuisBinnen(x, y) && button == SEO.LEFT) {
+		if (isMuisBinnen(x, y) && button == PConstants.LEFT) {
 			SEO.removeMenu(this);
 		}
 	}

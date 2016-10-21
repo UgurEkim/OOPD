@@ -1,10 +1,5 @@
 package nl.han.ica.ShootEmOut;
 
-import java.util.List;
-import java.util.Random;
-
-import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
-
 public class Rat extends Monster {
 
 	public Rat(ShootEmOut SEO) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
+import processing.core.PConstants;
 import processing.core.PGraphics;
 
 public class Attack extends GameObject implements ICollidableWithGameObjects {
@@ -45,7 +46,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 
 	@Override
 	public void draw(PGraphics g) {
-		g.ellipseMode(g.CORNER);
+		g.ellipseMode(PConstants.CORNER);
 		g.stroke(0, 0, 200);
 		g.fill(color[0], color[1], color[2]);
 		g.ellipse(getX(), getY(), this.width, this.height);
