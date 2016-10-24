@@ -9,31 +9,30 @@ import processing.core.PGraphics;
 
 public class Attack extends GameObject implements ICollidableWithGameObjects {
 
-	private int speed;
-	private int direction;
+	private float attackSpeed;
 	private ShootEmOut SEO;
 	private boolean player;
 	private int[] color = new int[3];
 
-	public Attack(ShootEmOut SEO, boolean player, float x, float y, int speed, int direction, int size) {
+	public Attack(ShootEmOut SEO, boolean player, float x, float y, float attackSpeed, float direction, int size) {
 		super(x + 24, y, size, size);
 		this.player = player;
 		this.SEO = SEO;
-		this.speed = speed;
-		this.direction = direction;
-		setDirectionSpeed(direction, speed);
+		this.setAttackSpeed(attackSpeed);
+		this.setDirection(direction);
+		this.setDirectionSpeed(direction, this.getAttackSpeed() * SEO.getAttackSpeedModifier());
 		this.color[0] = 255;
 		this.color[1] = 255;
 		this.color[2] = 0;
 	}
 
-	public Attack(ShootEmOut SEO, int[] rgb, float x, float y, int speed, int direction, int size) {
+	public Attack(ShootEmOut SEO, int[] rgb, float x, float y, int attackSpeed, float direction, int size) {
 		super(x, y, size, size);
 		this.SEO = SEO;
 		this.color = rgb;
-		this.speed = speed;
-		this.direction = direction;
-		setDirectionSpeed(direction, speed);
+		this.setAttackSpeed(attackSpeed);
+		this.setDirection(direction);
+		setDirectionSpeed(direction, attackSpeed);
 	}
 
 	@Override
@@ -63,6 +62,14 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 				((Player) g).removeHealth();
 			}
 		}
+	}
+
+	public float getAttackSpeed() {
+		return attackSpeed;
+	}
+
+	public void setAttackSpeed(float attackSpeed) {
+		this.attackSpeed = attackSpeed;
 	}
 
 }

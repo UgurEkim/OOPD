@@ -4,10 +4,9 @@ import java.util.Random;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
-//wtf
+
 public abstract class Monster extends SpriteObject {
 	protected int health;
-	protected int speed;
 	public ShootEmOut SEO;
 	protected double attackInterval;
 	protected int attackAmount;
@@ -30,10 +29,37 @@ public abstract class Monster extends SpriteObject {
 	}
 
 	public void removeHealth() {
-		health -= 1;
-		if (health == 0) {
+		this.setHealth(this.getHealth() - 1);
+		if (getHealth() == 0) {
 			kill();
-			SEO.addScore(100);
+			SEO.addScore(getScoreValue());
+			
+			Random r = new Random();
+			int rPowerup = r.nextInt(10);
+			
+			Powerup pUp;
+			
+			switch (rPowerup) {
+			case 0:
+				pUp = new AttackType(SEO, this.getX(), this.getY());
+				SEO.addGameObject(pUp);
+				break;
+			case 1:
+				pUp = new AttackSpeed(SEO, this.getX(), this.getY(), 2.5F);
+				SEO.addGameObject(pUp);
+				break;
+			case 2:
+				pUp = new Shield(SEO, this.getX(), this.getY(), 20.0);
+				SEO.addGameObject(pUp);
+				break;
+			case 3:
+				//pUp = new BonusHealth(SEO, this.getX(), this.getY());
+				//SEO.addGameObject(pUp);
+				break;
+				
+				default:
+					break;
+			}
 		}
 	}
 
@@ -53,5 +79,45 @@ public abstract class Monster extends SpriteObject {
 		if (this.getY() >= SEO.screenHeight) {
 			kill();
 		}
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public double getAttackInterval() {
+		return attackInterval;
+	}
+
+	public void setAttackInterval(double attackInterval) {
+		this.attackInterval = attackInterval;
+	}
+
+	public int getAttackAmount() {
+		return attackAmount;
+	}
+
+	public void setAttackAmount(int attackAmount) {
+		this.attackAmount = attackAmount;
+	}
+
+	public int getScoreValue() {
+		return scoreValue;
+	}
+
+	public void setScoreValue(int scoreValue) {
+		this.scoreValue = scoreValue;
+	}
+
+	public int getAttackDamage() {
+		return attackDamage;
+	}
+
+	public void setAttackDamage(int attackDamage) {
+		this.attackDamage = attackDamage;
 	}
 }

@@ -13,16 +13,16 @@ public class Slime extends Monster implements IAlarmListener {
 		this.setySpeed(1);
 		this.setHeight(64);
 		this.setWidth(58);
-		this.health = 5;
-
-		this.attackInterval = 2.00;
+		this.setHealth(5);
+		this.setAttackInterval(2.00);
+		this.setScoreValue(250);
 		resetAlarm();
 		setxPosition();
 
 	}
 
 	public void attack() {
-		Attack attack = new Attack(SEO, attackColor, getX() + 29, getY() + 64, 6, 180, 20);
+		Attack attack = new Attack(SEO, attackColor, getX() + 29, getY() + 64, 6, 180.0F, 20);
 		SEO.addGameObject(attack);
 	}
 
