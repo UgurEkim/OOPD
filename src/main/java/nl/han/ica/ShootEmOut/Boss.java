@@ -16,7 +16,7 @@ public class Boss extends Monster implements IAlarmListener {
 		this.setWidth(166);
 		this.setX(SEO.getWidth() / 2 - this.width / 2);
 		this.setY(-300);
-		this.attackInterval = 2.0 / SEO.getLevel();
+		this.attackInterval = 0.5 / SEO.getLevel();
 		this.health = 50 * SEO.getLevel();
 	}
 

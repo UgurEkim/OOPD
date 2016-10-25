@@ -32,7 +32,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		this.setWidth(44);
 		this.setHeight(58);
 		this.SEO = SEO;
-		this.attackInterval = 0.3 ;
+		this.attackInterval = 0.05 ;
 		this.speed = 8;
 		health = new Health(5, 3, this);
 		SEO.addGameObject(health);
