@@ -52,7 +52,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		buttons = new ArrayList<Button>();
 		scores = new ArrayList<Score>();
         persistence = new FilePersistence("main/java/nl/han/ica/waterworld/media/highscore.txt");
-        player = new Player(this, screenWidth / 2 - 26);
 		
 		setScore(0);
         createView();
@@ -94,6 +93,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	protected void removeMenu(Button buttonClicked) {		
 		switch (buttonClicked.getText()) {
 		case "Start":
+			player = new Player(this, screenWidth / 2 - 26);
 			addGameObject(player);
 			level = 1;
 			spawnSpeed = 1; 
@@ -118,19 +118,20 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	
 	public void monsterSpawner() {
 		Random random = new Random();
-		monsterAlarm = new Alarm("Monster", random.nextDouble() * (5.0 / (spawnSpeed + level)));
+		monsterAlarm = new Alarm("Monster", random.nextDouble() * (15.0 / (spawnSpeed + (level*2))));
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}
 	
 	public void levelTimeAlarmReset(){
-		levelTimeAlarm = new Alarm("Time", 3); 
+		levelTimeAlarm = new Alarm("Time", 5); 
 		levelTimeAlarm.addTarget(this);
 		levelTimeAlarm.start();
 	}
 	
 	
 	public void spawnBoss(){
+		monsterAlarm.stop();
 		addGameObject(new Boss(this));
 	}
 
@@ -155,15 +156,11 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 				addGameObject(m);
 				break;
 			}
-			
-			if(spawnSpeed < 5){
-				monsterSpawner();
-			}
+			monsterSpawner();
 		}
 		
 		if(alarmName == "Time"){
 			spawnSpeed += 1;
-			System.out.println(spawnSpeed);
 			if(spawnSpeed >= 5){
 				spawnBoss();
 			}
@@ -178,6 +175,9 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		scoreDashboard.setText("Score: " + score);
 	}
 
+	
+	
+	
 	public float getAttackSpeedModifier() {
 		return attackSpeedModifier;
 	}
