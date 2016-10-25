@@ -18,7 +18,7 @@ public class Health extends GameObject {
 		this.lives = lives;
 		this.player = player;
 	}
-
+	
 	public void removeLife() {
 		lives -= 1;
 		bar = max;
@@ -56,5 +56,9 @@ public class Health extends GameObject {
 				g.ellipse(500 + i * 55, 730, 50, 50);
 			}
 		}
+	}
+	
+	public void resetBar(){
+		this.bar = max;
 	}
 }

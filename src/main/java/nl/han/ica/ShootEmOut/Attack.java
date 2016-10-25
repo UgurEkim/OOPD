@@ -8,19 +8,16 @@ import processing.core.PConstants;
 import processing.core.PGraphics;
 
 public class Attack extends GameObject implements ICollidableWithGameObjects {
-
-	private float attackSpeed;
 	private ShootEmOut SEO;
 	private boolean player;
 	private int[] color = new int[3];
 
-	public Attack(ShootEmOut SEO, boolean player, float x, float y, float attackSpeed, float direction, int size) {
+	public Attack(ShootEmOut SEO, boolean player, float x, float y, float direction, int size) {
 		super(x + 24, y, size, size);
 		this.player = player;
 		this.SEO = SEO;
-		this.setAttackSpeed(attackSpeed);
 		this.setDirection(direction);
-		this.setDirectionSpeed(direction, this.getAttackSpeed() * SEO.getAttackSpeedModifier());
+		this.setDirectionSpeed(direction, 8);
 		this.color[0] = 255;
 		this.color[1] = 255;
 		this.color[2] = 0;
@@ -30,7 +27,6 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		super(x, y, size, size);
 		this.SEO = SEO;
 		this.color = rgb;
-		this.setAttackSpeed(attackSpeed);
 		this.setDirection(direction);
 		setDirectionSpeed(direction, attackSpeed);
 	}
@@ -63,13 +59,4 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 			}
 		}
 	}
-
-	public float getAttackSpeed() {
-		return attackSpeed;
-	}
-
-	public void setAttackSpeed(float attackSpeed) {
-		this.attackSpeed = attackSpeed;
-	}
-
 }

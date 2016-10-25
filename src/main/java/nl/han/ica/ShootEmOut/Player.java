@@ -15,6 +15,8 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	private Health health;
 	public ShootEmOut SEO;
 
+	private int attackType;
+	private boolean shield;
 	private double attackSpeedInterval;
 	private float movementSpeed;
 
@@ -32,6 +34,8 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		this.SEO = SEO;
 		this.setAttackSpeedInterval(0.3);
 		this.setMovementSpeed(8.0F);
+		this.shield = false;
+		this.attackType = 1;
 		health = new Health(5, 3, this);
 		SEO.addGameObject(health);
 		resetAlarm();
@@ -40,28 +44,31 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	public void attack() {
 		setCanShoot(false);
 		Attack attack;
-		switch (SEO.getAttackType()) {
+		switch (getAttackType()) {
 		case 1:
-			attack = new Attack(SEO, true, getX(), getY(), 7.0F, 0.0F, 20);
+			attack = new Attack(SEO, true, getX(), getY(), 0.0F, 20);
 			SEO.addGameObject(attack);
 			break;
 
 		case 2:
-			for (int i = 0; i < 3; i++) {
-				attack = new Attack(SEO, true, getX(), getY(), 7.0F, 340.0F + 20.0F * i, 20);
+			for (int i = 0; i < 2; i++) {
+				attack = new Attack(SEO, true, getX(), getY(), 355.0F + 10.0F * i, 20);
 				SEO.addGameObject(attack);
 			}
 			break;
 		case 3:
-			for (int i = 0; i < 10; i++) {
-				attack = new Attack(SEO, true, getX(), getY(), 7.0F, 290.0F + 15.0F * i, 20);
+			for (int i = 0; i < 3; i++) {
+				attack = new Attack(SEO, true, getX(), getY(), 350.0F + 10.0F * i, 20);
 				SEO.addGameObject(attack);
 			}
 			break;
-
+		case 4:
+			for (int i = 0; i < 4; i++) {
+				attack = new Attack(SEO, true, getX(), getY(), 350.0F + 5.0F * i, 20);
+				SEO.addGameObject(attack);
+			}
+			break;
 		default:
-			attack = new Attack(SEO, true, getX(), getY(), 7.0F, 0.0F, 20);
-			SEO.addGameObject(attack);
 			break;
 		}
 	}
@@ -123,9 +130,13 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	}
 
 	public void removeHealth() {
-		if (!SEO.isShield()) {
+		if (!isShield()) {
 			health.removeBar();
 		}
+	}
+	
+	public void resetHealth(){
+		health.resetBar();
 	}
 
 	@Override
@@ -137,6 +148,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			}
 
 			if (g instanceof Powerup) {
+				((Powerup) g).setPlayer(this);
 				((Powerup) g).effect();
 				SEO.deleteGameObject(g);
 			}
@@ -196,5 +208,22 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	private void setSpaceKey(boolean spaceKey) {
 		this.spaceKey = spaceKey;
 	}
+	
+	public void setAttackType(int attackType){
+		if (attackType <= 4) {
+			this.attackType = attackType;
+		}
+	}
+	
+	public int getAttackType(){
+		return attackType;
+	}
 
+	public boolean isShield() {
+		return shield;
+	}
+
+	public void setShield(boolean shield) {
+		this.shield = shield;
+	}
 }

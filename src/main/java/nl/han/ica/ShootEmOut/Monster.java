@@ -33,33 +33,7 @@ public abstract class Monster extends SpriteObject {
 		if (getHealth() == 0) {
 			kill();
 			SEO.addScore(getScoreValue());
-			
-			Random r = new Random();
-			int rPowerup = r.nextInt(10);
-			
-			Powerup pUp;
-			
-			switch (rPowerup) {
-			case 0:
-				pUp = new AttackType(SEO, this.getX(), this.getY());
-				SEO.addGameObject(pUp);
-				break;
-			case 1:
-				pUp = new AttackSpeed(SEO, this.getX(), this.getY(), 2.5F);
-				SEO.addGameObject(pUp);
-				break;
-			case 2:
-				pUp = new Shield(SEO, this.getX(), this.getY(), 20.0);
-				SEO.addGameObject(pUp);
-				break;
-			case 3:
-				//pUp = new BonusHealth(SEO, this.getX(), this.getY());
-				//SEO.addGameObject(pUp);
-				break;
-				
-				default:
-					break;
-			}
+			spawnPowerup();
 		}
 	}
 
@@ -70,8 +44,40 @@ public abstract class Monster extends SpriteObject {
 		if (this instanceof Slime) {
 			((Slime) this).stopAlarm();
 		}
+		if (this instanceof Boss){
+			((Boss) this).stopAlarm();
+		}
 		
 		SEO.deleteGameObject(this);
+	}
+	
+	private void spawnPowerup(){
+		Random r = new Random();
+		int rPowerup = r.nextInt(20);
+		
+		Powerup pUp;
+		
+		switch (rPowerup) {
+		case 0:
+			pUp = new AttackType(SEO, this.getX(), this.getY());
+			SEO.addGameObject(pUp);
+			break;
+		case 1:
+			pUp = new AttackSpeed(SEO, this.getX(), this.getY());
+			SEO.addGameObject(pUp);
+			break;
+		case 2:
+			pUp = new Shield(SEO, this.getX(), this.getY(), 5.0);
+			SEO.addGameObject(pUp);
+			break;
+		case 3:
+			pUp = new AddHealth(SEO, this.getX(), this.getY());
+			SEO.addGameObject(pUp);
+			break;
+			
+			default:
+				break;
+		}
 	}
 
 	@Override

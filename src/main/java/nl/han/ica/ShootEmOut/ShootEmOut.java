@@ -33,11 +33,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	protected int screenWidth;
 	protected int screenHeight;
 	
-
-	private float attackSpeedModifier = 1.0F;
-	private int attackType = 1;
-	private boolean shield = false;
-	
 	private int spawnSpeed;
 	private int level;
 
@@ -118,13 +113,13 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	
 	public void monsterSpawner() {
 		Random random = new Random();
-		monsterAlarm = new Alarm("Monster", random.nextDouble() * (15.0 / (spawnSpeed + (level*2))));
+		monsterAlarm = new Alarm("Monster", random.nextDouble() * (5.0 / (spawnSpeed + (level*2))));
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}
 	
 	public void levelTimeAlarmReset(){
-		levelTimeAlarm = new Alarm("Time", 5); 
+		levelTimeAlarm = new Alarm("Time", 15); 
 		levelTimeAlarm.addTarget(this);
 		levelTimeAlarm.start();
 	}
@@ -177,11 +172,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	
 	
-	
-	public float getAttackSpeedModifier() {
-		return attackSpeedModifier;
-	}
-	
 	@Override
 	public void update() {
 
@@ -195,31 +185,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		this.score = score;
 	}
 
-	public int getAttackType() {
-		return attackType;
-	}
-
-	public void setAttackType(int attackType) {
-		if (attackType <= 3) {
-			this.attackType = attackType;
-		}
-		else {
-			this.attackType = 3;
-		}
-	}
-
-	public boolean isShield() {
-		return shield;
-	}
-
-	public void setShield(boolean shield) {
-		this.shield = shield;
-	}
-
-	public void setAttackSpeedModifier(float attackSpeedModifier) {
-		this.attackSpeedModifier = attackSpeedModifier;
-	}
-	
 	public float getxPositionPlayer() {
 		return player.getX();
 	}

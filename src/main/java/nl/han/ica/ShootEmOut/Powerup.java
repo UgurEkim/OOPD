@@ -5,7 +5,8 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
 
 public abstract class Powerup extends SpriteObject {
 
-	private ShootEmOut SEO;
+	protected ShootEmOut SEO;
+	protected Player player;
 
 	public Powerup(String fileName, ShootEmOut SEO, float x, float y) {
 		super(new Sprite(fileName));
@@ -23,5 +24,9 @@ public abstract class Powerup extends SpriteObject {
 		if (this.getY() >= SEO.screenHeight) {
 			SEO.deleteGameObject(this);
 		}
+	}
+	
+	public void setPlayer(Player player){
+		this.player = player;
 	}
 }

@@ -2,18 +2,13 @@ package nl.han.ica.ShootEmOut;
 
 public class AttackSpeed extends Powerup {
 
-	private float attackSpeedModifer;
-	private ShootEmOut SEO;
-
-	public AttackSpeed(ShootEmOut SEO, float x, float y, float attackSpeedModifer) {
+	public AttackSpeed(ShootEmOut SEO, float x, float y) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/attackspeed.png", SEO, x, y);
-		this.setAttackSpeedModifer(attackSpeedModifer);
-		this.SEO = SEO;
 	}
 	
 	@Override
 	public void effect() {
-		SEO.setAttackSpeedModifier(this.attackSpeedModifer());
+		player.setAttackSpeedInterval(player.getAttackSpeedInterval() * 0.85);
 	}
 
 	@Override
@@ -21,13 +16,4 @@ public class AttackSpeed extends Powerup {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public float attackSpeedModifer() {
-		return attackSpeedModifer;
-	}
-
-	public void setAttackSpeedModifer(float attackSpeedModifer) {
-		this.attackSpeedModifer = attackSpeedModifer;
-	}
-
 }

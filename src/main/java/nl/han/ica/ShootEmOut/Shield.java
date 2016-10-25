@@ -7,18 +7,16 @@ public class Shield extends Powerup implements IAlarmListener {
 
 	private double duration;
 	private Alarm alarm;
-	private ShootEmOut SEO;
-
+	
 	public Shield(ShootEmOut SEO, float x, float y, double duration) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/shield.png", SEO, x, y);
 		this.setDuration(duration);
 		alarm = new Alarm("Shield", duration);
-		this.SEO = SEO;
 	}
 
 	@Override
 	public void effect() {
-		SEO.setShield(true);
+		player.setShield(true);
 		alarm.addTarget(this);
 		alarm.start();
 	}
@@ -37,10 +35,7 @@ public class Shield extends Powerup implements IAlarmListener {
 
 	@Override
 	public void triggerAlarm(String alarmName) {
-		if (alarmName == "Shield") {
-			alarm.stop();
-			SEO.setShield(false);
-		}
+		player.setShield(false);
 	}
 
 }
