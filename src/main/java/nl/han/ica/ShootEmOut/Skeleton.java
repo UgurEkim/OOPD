@@ -10,11 +10,11 @@ public class Skeleton extends Monster implements IAlarmListener {
 
 	public Skeleton(ShootEmOut SEO) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/skeleton.png", SEO);
-		this.setySpeed(2);
+		this.setySpeed(2 + SEO.getLevel());
 		this.setHeight(64);
 		this.setWidth(64);
 		this.setAttackInterval(1.50);
-		this.setHealth(3);
+		this.setHealth(3*SEO.getLevel());
 		this.setScoreValue(150);
 		resetAlarm();
 		setxPosition();
@@ -31,6 +31,11 @@ public class Skeleton extends Monster implements IAlarmListener {
 	public void triggerAlarm(String alarmName) {
 		attack();
 		resetAlarm();
+	}
+	
+	public void kill(){
+		stopAlarm();
+		SEO.deleteGameObject(this);
 	}
 
 	private void resetAlarm() {

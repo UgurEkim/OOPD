@@ -113,13 +113,13 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	
 	public void monsterSpawner() {
 		Random random = new Random();
-		monsterAlarm = new Alarm("Monster", random.nextDouble() * (5.0 / (spawnSpeed + (level*3))));
+		monsterAlarm = new Alarm("Monster", random.nextDouble() * (5.0 / (spawnSpeed + (level*2))));
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}
 	
 	public void levelTimeAlarmReset(){
-		levelTimeAlarm = new Alarm("Time", 15); 
+		levelTimeAlarm = new Alarm("Time", 5); 
 		levelTimeAlarm.addTarget(this);
 		levelTimeAlarm.start();
 	}
@@ -170,6 +170,12 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		scoreDashboard.setText("Score: " + score);
 	}
 
+	public void nextLevel(){
+		level += 1;
+		spawnSpeed = 1; 
+		monsterSpawner();
+		levelTimeAlarmReset();
+	}
 	
 	
 	@Override

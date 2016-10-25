@@ -8,7 +8,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 public class Boss extends Monster implements IAlarmListener {
 
 	private Alarm alarm;
-	// private int[] attackColor = { 255, 0, 0 };
+	private boolean canHit;
 
 	public Boss(ShootEmOut SEO) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/dragon.png", SEO);
@@ -19,8 +19,15 @@ public class Boss extends Monster implements IAlarmListener {
 		this.setY(-300);
 		this.setAttackInterval(2.0 / SEO.getLevel());
 		this.setHealth(200 * SEO.getLevel());
+		this.canHit = false;
 	}
-
+	
+	public void kill(){
+		stopAlarm();
+		SEO.deleteGameObject(this);
+		SEO.nextLevel();
+	}
+	
 	public void attack() {
 		Random r = new Random();
 		int number = r.nextInt(4);
@@ -76,9 +83,14 @@ public class Boss extends Monster implements IAlarmListener {
 
 	@Override
 	public void update() {
-		if (this.getY() > 50 && this.getySpeed() > 0) {
+		if (this.getY() > 50 && !this.canHit) {
+			this.canHit = true;
 			this.setySpeed(0);
 			resetAlarm();
 		}
+	}
+	
+	public boolean getCanHit(){
+		return canHit;
 	}
 }

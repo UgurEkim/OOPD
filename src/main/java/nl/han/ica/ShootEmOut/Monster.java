@@ -29,7 +29,15 @@ public abstract class Monster extends SpriteObject {
 	}
 
 	public void removeHealth() {
-		this.setHealth(this.getHealth() - 1);
+		if(this instanceof Boss){
+			if(((Boss)this).getCanHit()){
+				this.setHealth(this.getHealth() - 1);
+			}
+		}
+		else{
+			this.setHealth(this.getHealth() - 1);
+		}
+		
 		if (getHealth() == 0) {
 			kill();
 			SEO.addScore(getScoreValue());
@@ -37,19 +45,7 @@ public abstract class Monster extends SpriteObject {
 		}
 	}
 
-	public void kill() {
-		if (this instanceof Skeleton) {
-			((Skeleton) this).stopAlarm();
-		}
-		if (this instanceof Slime) {
-			((Slime) this).stopAlarm();
-		}
-		if (this instanceof Boss){
-			((Boss) this).stopAlarm();
-		}
-		
-		SEO.deleteGameObject(this);
-	}
+	public abstract void kill();
 	
 	private void spawnPowerup(){
 		Random r = new Random();

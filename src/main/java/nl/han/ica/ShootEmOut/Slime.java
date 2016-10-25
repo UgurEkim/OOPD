@@ -10,10 +10,10 @@ public class Slime extends Monster implements IAlarmListener {
 
 	public Slime(ShootEmOut SEO) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/slime.png", SEO);
-		this.setySpeed(1);
+		this.setySpeed(1 + SEO.getLevel());
 		this.setHeight(64);
 		this.setWidth(58);
-		this.setHealth(5);
+		this.setHealth(5*SEO.getLevel());
 		this.setAttackInterval(2.00);
 		this.setScoreValue(250);
 		resetAlarm();
@@ -26,6 +26,11 @@ public class Slime extends Monster implements IAlarmListener {
 		SEO.addGameObject(attack);
 	}
 
+	public void kill(){
+		stopAlarm();
+		SEO.deleteGameObject(this);
+	}
+	
 	@Override
 	public void triggerAlarm(String alarmName) {
 		attack();
