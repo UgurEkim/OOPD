@@ -12,13 +12,11 @@ import processing.core.PConstants;
 
 public class Player extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener {
 	private Alarm alarm;
-	private int speed;
-	private double attackInterval;
-	private int attackAmount;
-	private int attackDamage;
 	private Health health;
-	private Powerup[] powerup;
 	public ShootEmOut SEO;
+
+	private double attackSpeedInterval;
+	private float movementSpeed;
 
 	private boolean canShoot;
 	private boolean leftKey;
@@ -32,60 +30,79 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		this.setWidth(44);
 		this.setHeight(58);
 		this.SEO = SEO;
-		this.attackInterval = 0.05 ;
-		this.speed = 8;
+		this.setAttackSpeedInterval(0.3);
+		this.setMovementSpeed(8.0F);
 		health = new Health(5, 3, this);
 		SEO.addGameObject(health);
 		resetAlarm();
 	}
 
 	public void attack() {
-		canShoot = false;
-		Attack attack = new Attack(SEO, true, getX(), getY(), 7, 0, 20);
-		SEO.addGameObject(attack);
-	}
+		setCanShoot(false);
+		Attack attack;
+		switch (SEO.getAttackType()) {
+		case 1:
+			attack = new Attack(SEO, true, getX(), getY(), 7.0F, 0.0F, 20);
+			SEO.addGameObject(attack);
+			break;
 
-	public void move(int direction) {
+		case 2:
+			for (int i = 0; i < 3; i++) {
+				attack = new Attack(SEO, true, getX(), getY(), 7.0F, 340.0F + 20.0F * i, 20);
+				SEO.addGameObject(attack);
+			}
+			break;
+		case 3:
+			for (int i = 0; i < 10; i++) {
+				attack = new Attack(SEO, true, getX(), getY(), 7.0F, 290.0F + 15.0F * i, 20);
+				SEO.addGameObject(attack);
+			}
+			break;
 
+		default:
+			attack = new Attack(SEO, true, getX(), getY(), 7.0F, 0.0F, 20);
+			SEO.addGameObject(attack);
+			break;
+		}
 	}
 
 	@Override
 	public void keyPressed(int keyCode, char key) {
 		if (keyCode == PConstants.LEFT) {
-			leftKey = true;
+			setLeftKey(true);
 		}
 		if (keyCode == PConstants.RIGHT) {
-			rightKey = true;
+			setRightKey(true);
 		}
 		if (key == ' ') {
-			spaceKey = true;
+			setSpaceKey(true);
 		}
 	}
 
 	@Override
 	public void keyReleased(int keyCode, char key) {
 		if (keyCode == PConstants.LEFT) {
-			leftKey = false;
+			setLeftKey(false);
 		}
 		if (keyCode == PConstants.RIGHT) {
-			rightKey = false;
+			setRightKey(false);
 		}
 		if (key == ' ') {
-			spaceKey = false;
+			setSpaceKey(false);
 		}
 	}
 
 	@Override
 	public void update() {
-		if (rightKey) {
-			setDirectionSpeed(90, speed);
-		} else if (leftKey) {
-			setDirectionSpeed(270, speed);
+		if (isRightKey()) {
+			setDirectionSpeed(90, getMovementSpeed());
+		} else if (isLeftKey()) {
+			setDirectionSpeed(270, getMovementSpeed());
 		} else {
 			setDirectionSpeed(0, 0);
 		}
 
-		if (spaceKey && canShoot) {
+		if (isSpaceKey() && isCanShoot()) {
 			attack();
 		}
 
@@ -100,13 +117,15 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	}
 
 	private void resetAlarm() {
-		this.alarm = new Alarm("PlayerAttack", attackInterval);
+		this.alarm = new Alarm("PlayerAttack", getAttackSpeedInterval());
 		alarm.addTarget(this);
 		alarm.start();
 	}
 
 	public void removeHealth() {
-		health.removeBar();
+		if (!SEO.isShield()) {
+			health.removeBar();
+		}
 	}
 
 	@Override
@@ -116,13 +135,66 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 				((Monster) g).kill();
 				removeHealth();
 			}
+
+			if (g instanceof Powerup) {
+				((Powerup) g).effect();
+				SEO.deleteGameObject(g);
+			}
 		}
 	}
 
 	@Override
 	public void triggerAlarm(String alarmName) {
-		canShoot = true;
+		setCanShoot(true);
 		resetAlarm();
+	}
+
+	public double getAttackSpeedInterval() {
+		return attackSpeedInterval;
+	}
+
+	public void setAttackSpeedInterval(double attackSpeedInterval) {
+		this.attackSpeedInterval = attackSpeedInterval;
+	}
+
+	public float getMovementSpeed() {
+		return movementSpeed;
+	}
+
+	public void setMovementSpeed(float movementSpeed) {
+		this.movementSpeed = movementSpeed;
+	}
+
+	private boolean isCanShoot() {
+		return canShoot;
+	}
+
+	private void setCanShoot(boolean canShoot) {
+		this.canShoot = canShoot;
+	}
+
+	private boolean isLeftKey() {
+		return leftKey;
+	}
+
+	private void setLeftKey(boolean leftKey) {
+		this.leftKey = leftKey;
+	}
+
+	private boolean isRightKey() {
+		return rightKey;
+	}
+
+	private void setRightKey(boolean rightKey) {
+		this.rightKey = rightKey;
+	}
+
+	private boolean isSpaceKey() {
+		return spaceKey;
+	}
+
+	private void setSpaceKey(boolean spaceKey) {
+		this.spaceKey = spaceKey;
 	}
 
 }

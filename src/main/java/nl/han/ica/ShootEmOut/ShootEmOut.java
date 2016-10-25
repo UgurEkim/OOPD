@@ -13,21 +13,33 @@ import nl.han.ica.OOPDProcessingEngineHAN.Persistence.IPersistence;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
-//wtf
 @SuppressWarnings("serial")
 public class ShootEmOut extends GameEngine implements IAlarmListener {
 
+	private Player player;
+	
 	private Alarm monsterAlarm;
 	private Alarm levelTimeAlarm;
-	private int spawnSpeed;
-	private int level;
+	
 	private ArrayList<Button> buttons;
-	private TextObject scoreDashboard;
 	private ArrayList<Score> scores;
+	
+	private TextObject scoreDashboard;
+	
 	private IPersistence persistence;
+	
 	private int score;
+	
 	protected int screenWidth;
 	protected int screenHeight;
+	
+
+	private float attackSpeedModifier = 1.0F;
+	private int attackType = 1;
+	private boolean shield = false;
+	
+	private int spawnSpeed;
+	private int level;
 
 	public static void main(String[] args) {
 		PApplet.main("nl.han.ica.ShootEmOut.ShootEmOut");
@@ -37,11 +49,13 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	public void setupGame() {
 		screenWidth = 700;
 		screenHeight = 800;
-		score = 0;
 		buttons = new ArrayList<Button>();
 		scores = new ArrayList<Score>();
         persistence = new FilePersistence("main/java/nl/han/ica/waterworld/media/highscore.txt");
-		createView();
+        player = new Player(this, screenWidth / 2 - 26);
+		
+		setScore(0);
+        createView();
 		initMenu();
 	}
 	
@@ -80,7 +94,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	protected void removeMenu(Button buttonClicked) {		
 		switch (buttonClicked.getText()) {
 		case "Start":
-			addGameObject(new Player(this, screenWidth / 2 - 26));
+			addGameObject(player);
 			level = 1;
 			spawnSpeed = 1; 
 			monsterSpawner();
@@ -104,13 +118,13 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	
 	public void monsterSpawner() {
 		Random random = new Random();
-		this.monsterAlarm = new Alarm("Monster", random.nextDouble() * (0.5 / (spawnSpeed + level)));
+		monsterAlarm = new Alarm("Monster", random.nextDouble() * (5.0 / (spawnSpeed + level)));
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}
 	
 	public void levelTimeAlarmReset(){
-		this.levelTimeAlarm = new Alarm("Time", 3); 
+		levelTimeAlarm = new Alarm("Time", 3); 
 		levelTimeAlarm.addTarget(this);
 		levelTimeAlarm.start();
 	}
@@ -159,14 +173,58 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		}
 	}
 
+	public void addScore(int value) {
+		this.score = this.score + value;
+		scoreDashboard.setText("Score: " + score);
+	}
 
+	public float getAttackSpeedModifier() {
+		return attackSpeedModifier;
+	}
+	
 	@Override
 	public void update() {
 
 	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getAttackType() {
+		return attackType;
+	}
+
+	public void setAttackType(int attackType) {
+		if (attackType <= 3) {
+			this.attackType = attackType;
+		}
+		else {
+			this.attackType = 3;
+		}
+	}
+
+	public boolean isShield() {
+		return shield;
+	}
+
+	public void setShield(boolean shield) {
+		this.shield = shield;
+	}
+
+	public void setAttackSpeedModifier(float attackSpeedModifier) {
+		this.attackSpeedModifier = attackSpeedModifier;
+	}
 	
-	public void addScore(int value) {
-		this.score = this.score + value;
-		scoreDashboard.setText("Score: " + score);
+	public float getxPositionPlayer() {
+		return player.getX();
+	}
+	
+	public float getyPositionPlayer() {
+		return player.getY();
 	}
 }

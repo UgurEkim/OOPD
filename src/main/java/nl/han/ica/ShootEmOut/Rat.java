@@ -7,7 +7,8 @@ public class Rat extends Monster {
 		this.setySpeed(5);
 		this.setHeight(32);
 		this.setWidth(20);
-		this.health = 1;
+		this.setScoreValue(100);
+		this.setHealth(1);
 		setxPosition();
 	}
 }
