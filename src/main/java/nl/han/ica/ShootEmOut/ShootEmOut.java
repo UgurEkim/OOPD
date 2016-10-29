@@ -119,7 +119,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	}
 	
 	public void levelTimeAlarmReset(){
-		levelTimeAlarm = new Alarm("Time", 5); 
+		levelTimeAlarm = new Alarm("Time", 15); 
 		levelTimeAlarm.addTarget(this);
 		levelTimeAlarm.start();
 	}
