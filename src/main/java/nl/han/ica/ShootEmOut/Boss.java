@@ -22,13 +22,15 @@ public class Boss extends Monster implements IAlarmListener {
 		this.setScoreValue(450 * SEO.getLevel());
 		this.canHit = false;
 	}
-	
-	protected void kill(){
+
+	protected void kill() {
 		stopAlarm();
 		SEO.deleteGameObject(this);
-		SEO.nextLevel();
+		if (!SEO.getPlayer().isDead()) {
+			SEO.nextLevel();
+		}
 	}
-	
+
 	protected void attack() {
 		Random r = new Random();
 		int number = r.nextInt(4);
@@ -71,9 +73,8 @@ public class Boss extends Monster implements IAlarmListener {
 		if (!SEO.getPlayer().isDead()) {
 			attack();
 			resetAlarm();
-		}
-		else {
-			stopAlarm();
+		} else {
+			kill();
 		}
 	}
 
@@ -95,8 +96,8 @@ public class Boss extends Monster implements IAlarmListener {
 			resetAlarm();
 		}
 	}
-	
-	protected boolean getCanHit(){
+
+	protected boolean getCanHit() {
 		return canHit;
 	}
 }

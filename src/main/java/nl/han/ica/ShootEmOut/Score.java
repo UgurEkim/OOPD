@@ -1,5 +1,5 @@
 package nl.han.ica.ShootEmOut;
-//wtf
+
 public class Score {
 
 	private int score;
@@ -17,7 +17,7 @@ public class Score {
 	public String toString() {
 		return name + ": " + score;
 	}
-	
+
 	public int getScore() {
 		return score;
 	}

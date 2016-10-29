@@ -19,14 +19,14 @@ public abstract class Powerup extends SpriteObject {
 	}
 
 	protected abstract void effect();
-	
+
 	public void update() {
 		if (this.getY() >= SEO.screenHeight) {
 			SEO.deleteGameObject(this);
 		}
 	}
-	
-	protected void setPlayer(Player player){
+
+	protected void setPlayer(Player player) {
 		this.player = player;
 	}
 }

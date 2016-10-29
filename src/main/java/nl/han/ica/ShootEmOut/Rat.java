@@ -11,8 +11,8 @@ public class Rat extends Monster {
 		this.setHealth(1 * SEO.getLevel());
 		setxPosition();
 	}
-	
-	protected void kill(){
+
+	protected void kill() {
 		SEO.deleteGameObject(this);
 	}
 }

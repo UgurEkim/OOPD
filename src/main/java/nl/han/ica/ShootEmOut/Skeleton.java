@@ -34,7 +34,7 @@ public class Skeleton extends Monster implements IAlarmListener {
 			resetAlarm();
 		}
 		else {
-			stopAlarm();
+			kill();
 		}
 	}
 	

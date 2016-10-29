@@ -121,6 +121,10 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			setxSpeed(0);
 			setX(SEO.getWidth() - getWidth());
 		}
+		
+		if (isDead()) {
+			SEO.gameOver();
+		}
 	}
 
 	private void resetAlarm() {
@@ -145,9 +149,6 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			if (g instanceof Monster) {
 				((Monster) g).kill();
 				removeHealth();
-				if (isDead()) {
-					SEO.gameOver();
-				}
 			}
 
 			if (g instanceof Powerup) {

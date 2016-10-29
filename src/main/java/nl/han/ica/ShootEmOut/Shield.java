@@ -7,7 +7,7 @@ public class Shield extends Powerup implements IAlarmListener {
 
 	private double duration;
 	private Alarm alarm;
-	
+
 	public Shield(ShootEmOut SEO, float x, float y, double duration) {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/shield.png", SEO, x, y);
 		this.setDuration(duration);

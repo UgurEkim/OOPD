@@ -10,7 +10,7 @@ public class AttackType extends Powerup {
 	protected void effect() {
 		player.setAttackType(player.getAttackType() + 1);
 	}
-	
+
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

@@ -38,7 +38,7 @@ public class Slime extends Monster implements IAlarmListener {
 			resetAlarm();
 		}
 		else {
-			stopAlarm();
+			kill();
 		}
 	}
 
