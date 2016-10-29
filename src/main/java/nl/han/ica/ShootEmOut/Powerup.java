@@ -18,7 +18,7 @@ public abstract class Powerup extends SpriteObject {
 		this.SEO = SEO;
 	}
 
-	public abstract void effect();
+	protected abstract void effect();
 	
 	public void update() {
 		if (this.getY() >= SEO.screenHeight) {
@@ -26,7 +26,7 @@ public abstract class Powerup extends SpriteObject {
 		}
 	}
 	
-	public void setPlayer(Player player){
+	protected void setPlayer(Player player){
 		this.player = player;
 	}
 }

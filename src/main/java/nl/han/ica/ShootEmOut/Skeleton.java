@@ -29,8 +29,13 @@ public class Skeleton extends Monster implements IAlarmListener {
 
 	@Override
 	public void triggerAlarm(String alarmName) {
-		attack();
-		resetAlarm();
+		if (!SEO.getPlayer().isDead()) {
+			attack();
+			resetAlarm();
+		}
+		else {
+			stopAlarm();
+		}
 	}
 	
 	public void kill(){
@@ -45,7 +50,6 @@ public class Skeleton extends Monster implements IAlarmListener {
 	}
 
 	public void stopAlarm() {
-		
 		alarm.stop();
 	}
 

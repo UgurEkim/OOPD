@@ -7,7 +7,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
 
 public abstract class Monster extends SpriteObject {
 	protected int health;
-	public ShootEmOut SEO;
+	protected ShootEmOut SEO;
 	protected double attackInterval;
 	protected int attackAmount;
 	protected int scoreValue;
@@ -19,7 +19,7 @@ public abstract class Monster extends SpriteObject {
 		this.setY(-50);
 	}
 
-	public void setxPosition() {
+	protected void setxPosition() {
 		Random random = new Random();
 		float spawnX = random.nextInt(SEO.getWidth());
 		if (spawnX > SEO.getWidth() - this.width * 2) {
@@ -28,16 +28,15 @@ public abstract class Monster extends SpriteObject {
 		this.setX(spawnX);
 	}
 
-	public void removeHealth() {
-		if(this instanceof Boss){
-			if(((Boss)this).getCanHit()){
+	protected void removeHealth() {
+		if (this instanceof Boss) {
+			if (((Boss) this).getCanHit()) {
 				this.setHealth(this.getHealth() - 1);
 			}
-		}
-		else{
+		} else {
 			this.setHealth(this.getHealth() - 1);
 		}
-		
+
 		if (getHealth() == 0) {
 			kill();
 			SEO.addScore(getScoreValue());
@@ -45,14 +44,14 @@ public abstract class Monster extends SpriteObject {
 		}
 	}
 
-	public abstract void kill();
-	
-	private void spawnPowerup(){
+	protected abstract void kill();
+
+	private void spawnPowerup() {
 		Random r = new Random();
 		int rPowerup = r.nextInt(20);
-		
+
 		Powerup pUp;
-		
+
 		switch (rPowerup) {
 		case 0:
 			pUp = new AttackType(SEO, this.getX(), this.getY());
@@ -70,9 +69,9 @@ public abstract class Monster extends SpriteObject {
 			pUp = new AddHealth(SEO, this.getX(), this.getY());
 			SEO.addGameObject(pUp);
 			break;
-			
-			default:
-				break;
+
+		default:
+			break;
 		}
 	}
 
@@ -83,43 +82,43 @@ public abstract class Monster extends SpriteObject {
 		}
 	}
 
-	public int getHealth() {
+	protected int getHealth() {
 		return health;
 	}
 
-	public void setHealth(int health) {
+	protected void setHealth(int health) {
 		this.health = health;
 	}
 
-	public double getAttackInterval() {
+	protected double getAttackInterval() {
 		return attackInterval;
 	}
 
-	public void setAttackInterval(double attackInterval) {
+	protected void setAttackInterval(double attackInterval) {
 		this.attackInterval = attackInterval;
 	}
 
-	public int getAttackAmount() {
+	protected int getAttackAmount() {
 		return attackAmount;
 	}
 
-	public void setAttackAmount(int attackAmount) {
+	protected void setAttackAmount(int attackAmount) {
 		this.attackAmount = attackAmount;
 	}
 
-	public int getScoreValue() {
+	protected int getScoreValue() {
 		return scoreValue;
 	}
 
-	public void setScoreValue(int scoreValue) {
+	protected void setScoreValue(int scoreValue) {
 		this.scoreValue = scoreValue;
 	}
 
-	public int getAttackDamage() {
+	protected int getAttackDamage() {
 		return attackDamage;
 	}
 
-	public void setAttackDamage(int attackDamage) {
+	protected void setAttackDamage(int attackDamage) {
 		this.attackDamage = attackDamage;
 	}
 }

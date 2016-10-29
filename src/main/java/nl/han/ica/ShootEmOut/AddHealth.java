@@ -8,7 +8,7 @@ public class AddHealth extends Powerup {
 	}
 	
 	@Override
-	public void effect() {
+	protected void effect() {
 		player.resetHealth();
 	}
 

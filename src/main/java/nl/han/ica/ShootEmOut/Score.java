@@ -11,7 +11,7 @@ public class Score {
 	}
 
 	public void addScore(int value) {
-		score += value;
+		this.score += value;
 	}
 
 	public String toString() {

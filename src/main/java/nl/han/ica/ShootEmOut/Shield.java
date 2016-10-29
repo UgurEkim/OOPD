@@ -15,7 +15,7 @@ public class Shield extends Powerup implements IAlarmListener {
 	}
 
 	@Override
-	public void effect() {
+	protected void effect() {
 		player.setShield(true);
 		alarm.addTarget(this);
 		alarm.start();
@@ -25,11 +25,11 @@ public class Shield extends Powerup implements IAlarmListener {
 	public void update() {
 	}
 
-	public double getDuration() {
+	protected double getDuration() {
 		return duration;
 	}
 
-	public void setDuration(double duration) {
+	protected void setDuration(double duration) {
 		this.duration = duration;
 	}
 

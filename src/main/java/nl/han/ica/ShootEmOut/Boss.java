@@ -19,16 +19,17 @@ public class Boss extends Monster implements IAlarmListener {
 		this.setY(-300);
 		this.setAttackInterval(2.0 / SEO.getLevel());
 		this.setHealth(200 * SEO.getLevel());
+		this.setScoreValue(450 * SEO.getLevel());
 		this.canHit = false;
 	}
 	
-	public void kill(){
+	protected void kill(){
 		stopAlarm();
 		SEO.deleteGameObject(this);
 		SEO.nextLevel();
 	}
 	
-	public void attack() {
+	protected void attack() {
 		Random r = new Random();
 		int number = r.nextInt(4);
 		int[] attackColor = { r.nextInt(255), r.nextInt(255), r.nextInt(255) };
@@ -67,8 +68,13 @@ public class Boss extends Monster implements IAlarmListener {
 
 	@Override
 	public void triggerAlarm(String alarmName) {
-		attack();
-		resetAlarm();
+		if (!SEO.getPlayer().isDead()) {
+			attack();
+			resetAlarm();
+		}
+		else {
+			stopAlarm();
+		}
 	}
 
 	private void resetAlarm() {
@@ -77,7 +83,7 @@ public class Boss extends Monster implements IAlarmListener {
 		alarm.start();
 	}
 
-	public void stopAlarm() {
+	protected void stopAlarm() {
 		alarm.stop();
 	}
 
@@ -90,7 +96,7 @@ public class Boss extends Monster implements IAlarmListener {
 		}
 	}
 	
-	public boolean getCanHit(){
+	protected boolean getCanHit(){
 		return canHit;
 	}
 }
