@@ -87,17 +87,8 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	protected void removeMenu(Button buttonClicked) {
 		switch (buttonClicked.getText()) {
-		case "Start":
-			player = new Player(this, screenWidth / 2 - 26);
-			addGameObject(player);
-			level = 1;
-			spawnSpeed = 1;
-			monsterSpawner();
-			levelTimeAlarmReset();
-			createDashboard(screenWidth, 100);
-			break;
-			
 		case "Restart":
+		case "Start":
 			player = new Player(this, screenWidth / 2 - 26);
 			addGameObject(player);
 			level = 1;
@@ -182,7 +173,15 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		setSpawnSpeed(1);
 		
 		Button restartButton = new Button(this, screenWidth / 2, 400, "Restart");
-		addGameObject(restartButton, restartButton.getX(), restartButton.getY());		
+		addGameObject(restartButton, restartButton.getX(), restartButton.getY());	
+		buttons.add(restartButton);
+		
+		TextObject gameOverText = new TextObject("Game Over!", 30);
+		Dashboard dashboard = new Dashboard(screenWidth / 2, 200, width, height);
+		gameOverText.setForeColor(255, 255, 255, 255);
+		dashboard.addGameObject(gameOverText);
+		addGameObject(dashboard);
+		
 	}
 
 	protected void addScore(int value) {
@@ -232,5 +231,9 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	private void setLevel(int level) {
 		this.level = level;
+	}
+
+	protected Player getPlayer() {
+		return player;
 	}
 }

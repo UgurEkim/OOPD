@@ -68,8 +68,13 @@ public class Boss extends Monster implements IAlarmListener {
 
 	@Override
 	public void triggerAlarm(String alarmName) {
-		attack();
-		resetAlarm();
+		if (!SEO.getPlayer().isDead()) {
+			attack();
+			resetAlarm();
+		}
+		else {
+			stopAlarm();
+		}
 	}
 
 	private void resetAlarm() {

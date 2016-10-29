@@ -159,7 +159,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	}
 
 	protected boolean isDead() {
-		if (health.getBar() == 0 && health.getLives() < 0) {
+		if (health.getBar() <= 0 && health.getLives() < 0) {
 			return true;
 		}
 		return false;

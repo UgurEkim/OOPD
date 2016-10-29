@@ -13,7 +13,7 @@ public class Slime extends Monster implements IAlarmListener {
 		this.setySpeed(1 + SEO.getLevel());
 		this.setHeight(64);
 		this.setWidth(58);
-		this.setHealth(5*SEO.getLevel());
+		this.setHealth(5 * SEO.getLevel());
 		this.setAttackInterval(2.00);
 		this.setScoreValue(250);
 		resetAlarm();
@@ -26,15 +26,20 @@ public class Slime extends Monster implements IAlarmListener {
 		SEO.addGameObject(attack);
 	}
 
-	protected void kill(){
+	protected void kill() {
 		stopAlarm();
 		SEO.deleteGameObject(this);
 	}
-	
+
 	@Override
 	public void triggerAlarm(String alarmName) {
-		attack();
-		resetAlarm();
+		if (!SEO.getPlayer().isDead()) {
+			attack();
+			resetAlarm();
+		}
+		else {
+			stopAlarm();
+		}
 	}
 
 	private void resetAlarm() {
