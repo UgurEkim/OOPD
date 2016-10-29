@@ -55,7 +55,11 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 			}
 			if (g instanceof Player && !player) {
 				SEO.deleteGameObject(this);
-				((Player) g).removeHealth();
+				if (((Player) g).isDead()) {
+					SEO.gameOver();
+				} else {
+					((Player) g).removeHealth();
+				}
 			}
 		}
 	}

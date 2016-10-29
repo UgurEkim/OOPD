@@ -21,12 +21,12 @@ public class Slime extends Monster implements IAlarmListener {
 
 	}
 
-	public void attack() {
+	protected void attack() {
 		Attack attack = new Attack(SEO, attackColor, getX() + 29, getY() + 64, 6, 180.0F, 20);
 		SEO.addGameObject(attack);
 	}
 
-	public void kill(){
+	protected void kill(){
 		stopAlarm();
 		SEO.deleteGameObject(this);
 	}
@@ -43,7 +43,7 @@ public class Slime extends Monster implements IAlarmListener {
 		alarm.start();
 	}
 
-	public void stopAlarm() {
+	protected void stopAlarm() {
 		alarm.stop();
 	}
 }

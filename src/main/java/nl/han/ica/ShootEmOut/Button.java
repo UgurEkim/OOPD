@@ -44,7 +44,7 @@ public class Button extends GameObject {
 		}
 	}
 
-	public String getText() {
+	protected String getText() {
 		return text;
 	}
 }

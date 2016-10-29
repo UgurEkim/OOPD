@@ -12,7 +12,7 @@ public class Rat extends Monster {
 		setxPosition();
 	}
 	
-	public void kill(){
+	protected void kill(){
 		SEO.deleteGameObject(this);
 	}
 }

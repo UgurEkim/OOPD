@@ -7,7 +7,7 @@ public class AttackType extends Powerup {
 	}
 
 	@Override
-	public void effect() {
+	protected void effect() {
 		player.setAttackType(player.getAttackType() + 1);
 	}
 	
