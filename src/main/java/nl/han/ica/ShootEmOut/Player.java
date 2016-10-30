@@ -36,7 +36,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		this.setMovementSpeed(8.0F);
 		this.shield = false;
 		this.attackType = 1;
-		health = new Health(5, 3, this);
+		health = new Health(5, 3, this, SEO);
 		SEO.addGameObject(health);
 		resetAlarm();
 	}
@@ -64,7 +64,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			break;
 		case 4:
 			for (int i = 0; i < 4; i++) {
-				attack = new Attack(SEO, true, getX(), getY(), 350.0F + 5.0F * i, 20);
+				attack = new Attack(SEO, true, getX(), getY(), 352.5F + 5.0F * i, 20);
 				SEO.addGameObject(attack);
 			}
 			break;
@@ -145,24 +145,20 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			if (g instanceof Monster) {
 				((Monster) g).kill();
 				removeHealth();
-				if (isDead()) {
-					SEO.gameOver();
-				}
 			}
 
 			if (g instanceof Powerup) {
 				((Powerup) g).setPlayer(this);
 				((Powerup) g).effect();
+
+				SEO.playPowerupSound();
 				SEO.deleteGameObject(g);
 			}
 		}
 	}
-
-	protected boolean isDead() {
-		if (health.getBar() <= 0 && health.getLives() < 0) {
-			return true;
-		}
-		return false;
+	
+	public boolean isDead(){
+		return health.isDead();
 	}
 
 	@Override
