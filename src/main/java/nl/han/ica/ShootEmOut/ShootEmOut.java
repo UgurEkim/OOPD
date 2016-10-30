@@ -8,22 +8,34 @@ import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Dashboard.Dashboard;
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.TextObject;
-import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IKeyInput;
+import nl.han.ica.OOPDProcessingEngineHAN.Persistence.FilePersistence;
+import nl.han.ica.OOPDProcessingEngineHAN.Persistence.IPersistence;
+import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
 @SuppressWarnings("serial")
-public class ShootEmOut extends GameEngine implements IAlarmListener, IKeyInput {
+public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	private Player player;
 
 	private Alarm monsterAlarm;
 	private Alarm levelTimeAlarm;
+	
+	private Sound backgroundmusic;
+	private Sound levelupSound;
+	private Sound attackSound;
+	private Sound enemyAttackSound;
+	private Sound powerupSound;
+	private Sound loselifeSound;
+	private Sound killEnemySound;
 
 	private ArrayList<Button> buttons;
 	private ArrayList<Score> scores;
 
 	private TextObject scoreDashboard;
+
+	private IPersistence persistence;
 
 	private int score;
 
@@ -43,7 +55,9 @@ public class ShootEmOut extends GameEngine implements IAlarmListener, IKeyInput 
 		screenHeight = 800;
 		buttons = new ArrayList<Button>();
 		scores = new ArrayList<Score>();
+		persistence = new FilePersistence("main/java/nl/han/ica/waterworld/media/highscore.txt");
 
+		initializeSound();
 		setScore(0);
 		createView();
 		initMenu();
@@ -96,6 +110,9 @@ public class ShootEmOut extends GameEngine implements IAlarmListener, IKeyInput 
 
 		case "Highscore":
 
+			break;
+
+		default:
 			break;
 
 		}
@@ -156,7 +173,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener, IKeyInput 
 			}
 		}
 	}
-
+	
 	protected void gameOver() {
 		deleteAllGameOBjects();
 		monsterAlarm.stop();
@@ -164,17 +181,17 @@ public class ShootEmOut extends GameEngine implements IAlarmListener, IKeyInput 
 		setScore(0);
 		setLevel(1);
 		setSpawnSpeed(1);
-
+		
 		Button restartButton = new Button(this, screenWidth / 2, 400, "Restart");
-		addGameObject(restartButton, restartButton.getX(), restartButton.getY());
+		addGameObject(restartButton, restartButton.getX(), restartButton.getY());	
 		buttons.add(restartButton);
-
+		
 		TextObject gameOverText = new TextObject("Game Over!", 30);
 		Dashboard dashboard = new Dashboard(screenWidth / 2, 200, width, height);
 		gameOverText.setForeColor(255, 255, 255, 255);
 		dashboard.addGameObject(gameOverText);
 		addGameObject(dashboard);
-
+		
 	}
 
 	protected void addScore(int value) {
@@ -187,27 +204,53 @@ public class ShootEmOut extends GameEngine implements IAlarmListener, IKeyInput 
 		setSpawnSpeed(1);
 		monsterSpawner();
 		levelTimeAlarmReset();
+		levelupSound.rewind();
+		levelupSound.play();
 	}
+	
+	private void initializeSound() {
+        backgroundmusic = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/bgm.mp3");
+        backgroundmusic.loop(-1);
+        
+        levelupSound = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/level.mp3"); 
+        attackSound = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/shoot.wav"); 
+        enemyAttackSound = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/enemyshoot.mp3"); 
+       	powerupSound = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/powerup.mp3"); 
+       	loselifeSound = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/loselife.mp3"); 
+       	killEnemySound = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/kill.mp3"); 
+    }
+	
 
 	@Override
 	public void update() {
 
 	}
 
-	@Override
-	public void keyPressed(int keyCode, char key) {
-		if (key == ' ') {
-			System.out.println("Kanker");
-		}
+	public void playAttackSound(){
+		attackSound.rewind();
+		attackSound.play();
 	}
-
-	@Override
-	public void keyReleased(int keyCode, char key) {
-		if (key == ' ') {
-			System.out.println("Kanker");
-		}
+	
+	public void playEnemyAttackSound(){
+		enemyAttackSound.rewind();
+		enemyAttackSound.play();
 	}
-
+	
+	public void playPowerupSound(){
+		powerupSound.rewind();
+		powerupSound.play();
+	}
+	
+	public void playLoselifeSound(){
+		loselifeSound.rewind();
+		loselifeSound.play();
+	}
+	
+	public void playKillEnemySound(){
+		killEnemySound.rewind();
+		killEnemySound.play();
+	}
+	
 	protected int getScore() {
 		return score;
 	}

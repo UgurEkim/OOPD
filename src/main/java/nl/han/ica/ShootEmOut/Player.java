@@ -8,10 +8,9 @@ import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
-import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IKeyInput;
 import processing.core.PConstants;
 
-public class Player extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener, IKeyInput {
+public class Player extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener {
 	private Alarm alarm;
 	private Health health;
 	private ShootEmOut SEO;
@@ -28,16 +27,16 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 
 	public Player(ShootEmOut SEO, float x) {
 		super(new Sprite("src/main/java/nl/han/ica/ShootEmOut/media/player.png"));
-		setX(x);
-		setY(650);
-		setWidth(44);
-		setHeight(58);
+		this.setX(x);
+		this.setY(650);
+		this.setWidth(44);
+		this.setHeight(58);
 		this.SEO = SEO;
-		setAttackSpeedInterval(0.3);
-		setMovementSpeed(8.0F);
-		setShield(false);
-		setAttackType(1);
-		health = new Health(1, 0, this);
+		this.setAttackSpeedInterval(0.3);
+		this.setMovementSpeed(8.0F);
+		this.shield = false;
+		this.attackType = 1;
+		health = new Health(5, 3, this, SEO);
 		SEO.addGameObject(health);
 		resetAlarm();
 	}
@@ -65,7 +64,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			break;
 		case 4:
 			for (int i = 0; i < 4; i++) {
-				attack = new Attack(SEO, true, getX(), getY(), 350.0F + 5.0F * i, 20);
+				attack = new Attack(SEO, true, getX(), getY(), 352.5F + 5.0F * i, 20);
 				SEO.addGameObject(attack);
 			}
 			break;
@@ -122,10 +121,6 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			setxSpeed(0);
 			setX(SEO.getWidth() - getWidth());
 		}
-
-		if (isDead()) {
-			SEO.gameOver();
-		}
 	}
 
 	private void resetAlarm() {
@@ -155,16 +150,15 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			if (g instanceof Powerup) {
 				((Powerup) g).setPlayer(this);
 				((Powerup) g).effect();
+
+				SEO.playPowerupSound();
 				SEO.deleteGameObject(g);
 			}
 		}
 	}
-
-	protected boolean isDead() {
-		if (health.getBar() <= 0 && health.getLives() < 0) {
-			return true;
-		}
-		return false;
+	
+	public boolean isDead(){
+		return health.isDead();
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
+import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
 
 public abstract class Monster extends SpriteObject {
 	protected int health;
@@ -16,7 +17,7 @@ public abstract class Monster extends SpriteObject {
 	public Monster(String fileName, ShootEmOut SEO) {
 		super(new Sprite(fileName));
 		this.SEO = SEO;
-		this.setY(-50);
+		this.setY(-50);   
 	}
 
 	protected void setxPosition() {
@@ -39,6 +40,7 @@ public abstract class Monster extends SpriteObject {
 
 		if (getHealth() == 0) {
 			kill();
+			SEO.playKillEnemySound();
 			SEO.addScore(getScoreValue());
 			spawnPowerup();
 		}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
+import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 
@@ -21,6 +22,8 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		this.color[0] = 255;
 		this.color[1] = 255;
 		this.color[2] = 0;
+		
+		SEO.playAttackSound();
 	}
 
 	public Attack(ShootEmOut SEO, int[] rgb, float x, float y, int attackSpeed, float direction, int size) {
@@ -29,6 +32,8 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		this.color = rgb;
 		this.setDirection(direction);
 		setDirectionSpeed(direction, attackSpeed);
+		
+		SEO.playEnemyAttackSound();
 	}
 
 	@Override

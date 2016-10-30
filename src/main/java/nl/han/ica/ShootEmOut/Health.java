@@ -1,6 +1,7 @@
 package nl.han.ica.ShootEmOut;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
+import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 
@@ -11,16 +12,23 @@ public class Health extends GameObject {
 	private int max;
 	private int bar;
 	private int lives;
-
-	public Health(int bar, int lives, Player player) {
+	private ShootEmOut SEO;
+	
+	public Health(int bar, int lives, Player player, ShootEmOut SEO) {
 		this.setBar(bar);
 		this.setMax(bar);
 		this.setLives(lives);
 		this.player = player;
+		this.SEO = SEO;
 	}
 
 	protected void removeLife() {
 		setLives(getLives() - 1);
+		SEO.playLoselifeSound();
+		
+		if(isDead()){
+			SEO.gameOver();
+		}
 	}
 
 	protected void removeBar() {
@@ -32,6 +40,14 @@ public class Health extends GameObject {
 				setBar(max);
 			}
 		}
+	}
+	
+	public boolean isDead(){
+		if (getBar() <= 0 && getLives() < 0) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
