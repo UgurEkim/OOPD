@@ -111,9 +111,9 @@ public class ShootEmOut extends GameEngine implements IAlarmListener, IKeyInput 
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}
-
-	public void levelTimeAlarmReset() {
-		levelTimeAlarm = new Alarm("Time", 5);
+	
+	public void levelTimeAlarmReset(){
+		levelTimeAlarm = new Alarm("Time", 15); 
 		levelTimeAlarm.addTarget(this);
 		levelTimeAlarm.start();
 	}
