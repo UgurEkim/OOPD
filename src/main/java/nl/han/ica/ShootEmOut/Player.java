@@ -8,9 +8,10 @@ import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
+import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IKeyInput;
 import processing.core.PConstants;
 
-public class Player extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener {
+public class Player extends SpriteObject implements ICollidableWithGameObjects, IAlarmListener, IKeyInput {
 	private Alarm alarm;
 	private Health health;
 	private ShootEmOut SEO;
@@ -27,16 +28,16 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 
 	public Player(ShootEmOut SEO, float x) {
 		super(new Sprite("src/main/java/nl/han/ica/ShootEmOut/media/player.png"));
-		this.setX(x);
-		this.setY(650);
-		this.setWidth(44);
-		this.setHeight(58);
+		setX(x);
+		setY(650);
+		setWidth(44);
+		setHeight(58);
 		this.SEO = SEO;
-		this.setAttackSpeedInterval(0.3);
-		this.setMovementSpeed(8.0F);
-		this.shield = false;
-		this.attackType = 1;
-		health = new Health(5, 3, this);
+		setAttackSpeedInterval(0.3);
+		setMovementSpeed(8.0F);
+		setShield(false);
+		setAttackType(1);
+		health = new Health(1, 0, this);
 		SEO.addGameObject(health);
 		resetAlarm();
 	}
@@ -121,7 +122,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 			setxSpeed(0);
 			setX(SEO.getWidth() - getWidth());
 		}
-		
+
 		if (isDead()) {
 			SEO.gameOver();
 		}

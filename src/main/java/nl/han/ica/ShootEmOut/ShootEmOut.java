@@ -8,13 +8,12 @@ import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Dashboard.Dashboard;
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.TextObject;
-import nl.han.ica.OOPDProcessingEngineHAN.Persistence.FilePersistence;
-import nl.han.ica.OOPDProcessingEngineHAN.Persistence.IPersistence;
+import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IKeyInput;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
 @SuppressWarnings("serial")
-public class ShootEmOut extends GameEngine implements IAlarmListener {
+public class ShootEmOut extends GameEngine implements IAlarmListener, IKeyInput {
 
 	private Player player;
 
@@ -25,8 +24,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	private ArrayList<Score> scores;
 
 	private TextObject scoreDashboard;
-
-	private IPersistence persistence;
 
 	private int score;
 
@@ -46,7 +43,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		screenHeight = 800;
 		buttons = new ArrayList<Button>();
 		scores = new ArrayList<Score>();
-		persistence = new FilePersistence("main/java/nl/han/ica/waterworld/media/highscore.txt");
 
 		setScore(0);
 		createView();
@@ -100,9 +96,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 		case "Highscore":
 
-			break;
-
-		default:
 			break;
 
 		}
@@ -163,7 +156,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 			}
 		}
 	}
-	
+
 	protected void gameOver() {
 		deleteAllGameOBjects();
 		monsterAlarm.stop();
@@ -171,17 +164,17 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		setScore(0);
 		setLevel(1);
 		setSpawnSpeed(1);
-		
+
 		Button restartButton = new Button(this, screenWidth / 2, 400, "Restart");
-		addGameObject(restartButton, restartButton.getX(), restartButton.getY());	
+		addGameObject(restartButton, restartButton.getX(), restartButton.getY());
 		buttons.add(restartButton);
-		
+
 		TextObject gameOverText = new TextObject("Game Over!", 30);
 		Dashboard dashboard = new Dashboard(screenWidth / 2, 200, width, height);
 		gameOverText.setForeColor(255, 255, 255, 255);
 		dashboard.addGameObject(gameOverText);
 		addGameObject(dashboard);
-		
+
 	}
 
 	protected void addScore(int value) {
@@ -199,6 +192,20 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	@Override
 	public void update() {
 
+	}
+
+	@Override
+	public void keyPressed(int keyCode, char key) {
+		if (key == ' ') {
+			System.out.println("Kanker");
+		}
+	}
+
+	@Override
+	public void keyReleased(int keyCode, char key) {
+		if (key == ' ') {
+			System.out.println("Kanker");
+		}
 	}
 
 	protected int getScore() {

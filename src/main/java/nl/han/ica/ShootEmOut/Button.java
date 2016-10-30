@@ -1,10 +1,11 @@
 package nl.han.ica.ShootEmOut;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
+import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IMouseInput;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 
-public class Button extends GameObject {
+public class Button extends GameObject implements IMouseInput {
 
 	private String text;
 	private ShootEmOut SEO;
