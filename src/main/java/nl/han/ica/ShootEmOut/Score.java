@@ -3,19 +3,13 @@ package nl.han.ica.ShootEmOut;
 public class Score {
 
 	private int score;
-	private String name;
 
-	public Score(String name) {
-		this.name = name;
+	public Score() {
 		this.score = 0;
 	}
 
-	public void addScore(int value) {
+	public void setScore(int value) {
 		this.score += value;
-	}
-
-	public String toString() {
-		return name + ": " + score;
 	}
 
 	public int getScore() {

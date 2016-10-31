@@ -4,7 +4,6 @@ import java.util.Random;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
-import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
 
 public abstract class Monster extends SpriteObject {
 	protected int health;

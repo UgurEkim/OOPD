@@ -1,7 +1,6 @@
 package nl.han.ica.ShootEmOut;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
-import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 
