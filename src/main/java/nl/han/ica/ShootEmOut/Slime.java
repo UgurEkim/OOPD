@@ -14,7 +14,7 @@ public class Slime extends Monster implements IAlarmListener {
 		this.setHeight(64);
 		this.setWidth(58);
 		this.setHealth(5 * SEO.getLevel());
-		this.setAttackInterval(2.00);
+		this.setAttackInterval(2.00 / SEO.getLevel());
 		this.setScoreValue(250);
 		resetAlarm();
 		setxPosition();

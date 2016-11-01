@@ -13,7 +13,7 @@ public class Skeleton extends Monster implements IAlarmListener {
 		this.setySpeed(2 + SEO.getLevel());
 		this.setHeight(64);
 		this.setWidth(64);
-		this.setAttackInterval(1.50);
+		this.setAttackInterval(1.50 / SEO.getLevel());
 		this.setHealth(3*SEO.getLevel());
 		this.setScoreValue(150);
 		resetAlarm();
