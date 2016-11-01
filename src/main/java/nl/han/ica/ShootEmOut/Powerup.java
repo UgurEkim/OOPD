@@ -20,6 +20,7 @@ public abstract class Powerup extends SpriteObject {
 
 	protected abstract void effect();
 	
+	@Override
 	public void update() {
 		if (this.getY() >= SEO.screenHeight) {
 			SEO.deleteGameObject(this);

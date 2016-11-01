@@ -20,7 +20,8 @@ public class Button extends GameObject implements IMouseInput {
 	public void update() {
 
 	}
-
+	
+	@Override
 	public void draw(PGraphics g) {
 		g.rectMode(PConstants.CENTER);
 		g.fill(80, 200, 80);
