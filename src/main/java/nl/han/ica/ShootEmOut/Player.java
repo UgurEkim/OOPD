@@ -27,13 +27,13 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 
 	public Player(ShootEmOut SEO, float x) {
 		super(new Sprite("src/main/java/nl/han/ica/ShootEmOut/media/player.png"));
-		this.setX(x);
-		this.setY(650);
-		this.setWidth(44);
-		this.setHeight(58);
+		setX(x);
+		setY(650);
+		setWidth(44);
+		setHeight(58);
 		this.SEO = SEO;
-		this.setAttackSpeedInterval(0.3);
-		this.setMovementSpeed(8.0F);
+		setAttackSpeedInterval(0.3);
+		setMovementSpeed(8.0F);
 		this.shield = false;
 		this.attackType = 1;
 		health = new Health(5, 3, this, SEO);
@@ -41,7 +41,7 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		resetAlarm();
 	}
 
-	protected void attack() {
+	private void attack() {
 		setCanShoot(false);
 		Attack attack;
 		switch (getAttackType()) {
@@ -124,18 +124,18 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 	}
 
 	private void resetAlarm() {
-		this.alarm = new Alarm("PlayerAttack", getAttackSpeedInterval());
+		alarm = new Alarm("PlayerAttack", getAttackSpeedInterval());
 		alarm.addTarget(this);
 		alarm.start();
 	}
 
-	protected void removeHealth() {
+	public void removeHealth() {
 		if (!isShield()) {
 			health.removeBar();
 		}
 	}
 
-	protected void resetHealth() {
+	public void resetHealth() {
 		health.resetBar();
 	}
 
@@ -167,19 +167,19 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		resetAlarm();
 	}
 
-	protected double getAttackSpeedInterval() {
+	public double getAttackSpeedInterval() {
 		return attackSpeedInterval;
 	}
 
-	protected void setAttackSpeedInterval(double attackSpeedInterval) {
+	public void setAttackSpeedInterval(double attackSpeedInterval) {
 		this.attackSpeedInterval = attackSpeedInterval;
 	}
 
-	protected float getMovementSpeed() {
+	private float getMovementSpeed() {
 		return movementSpeed;
 	}
 
-	protected void setMovementSpeed(float movementSpeed) {
+	private void setMovementSpeed(float movementSpeed) {
 		this.movementSpeed = movementSpeed;
 	}
 
@@ -215,21 +215,21 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		this.spaceKey = spaceKey;
 	}
 
-	protected void setAttackType(int attackType) {
+	public void setAttackType(int attackType) {
 		if (attackType <= 4) {
 			this.attackType = attackType;
 		}
 	}
 
-	protected int getAttackType() {
+	public int getAttackType() {
 		return attackType;
 	}
 
-	protected boolean isShield() {
+	private boolean isShield() {
 		return shield;
 	}
 
-	protected void setShield(boolean shield) {
+	public void setShield(boolean shield) {
 		this.shield = shield;
 	}
 }

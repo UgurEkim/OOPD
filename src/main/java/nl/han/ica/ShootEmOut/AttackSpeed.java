@@ -7,13 +7,7 @@ public class AttackSpeed extends Powerup {
 	}
 
 	@Override
-	protected void effect() {
+	public void effect() {
 		player.setAttackSpeedInterval(player.getAttackSpeedInterval() * 0.85);
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
 	}
 }

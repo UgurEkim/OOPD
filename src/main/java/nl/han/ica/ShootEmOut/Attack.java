@@ -16,8 +16,8 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		super(x + 24, y, size, size);
 		this.player = player;
 		this.SEO = SEO;
-		this.setDirection(direction);
-		this.setDirectionSpeed(direction, 8);
+		setDirection(direction);
+		setDirectionSpeed(direction, 8);
 		this.color[0] = 255;
 		this.color[1] = 255;
 		this.color[2] = 0;
@@ -29,7 +29,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		super(x, y, size, size);
 		this.SEO = SEO;
 		this.color = rgb;
-		this.setDirection(direction);
+		setDirection(direction);
 		setDirectionSpeed(direction, attackSpeed);
 		
 		SEO.playEnemyAttackSound();
@@ -37,7 +37,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 
 	@Override
 	public void update() {
-		if (this.getY() <= 0 || this.getY() >= SEO.screenHeight || this.getX() <= 0 || this.getX() >= SEO.screenWidth) {
+		if (getY() <= 0 || getY() >= SEO.screenHeight || getX() <= 0 || getX() >= SEO.screenWidth) {
 			SEO.deleteGameObject(this);
 		}
 	}
@@ -47,7 +47,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		g.ellipseMode(PConstants.CENTER);
 		g.stroke(0, 0, 200);
 		g.fill(color[0], color[1], color[2]);
-		g.ellipse(getX(), getY(), this.width, this.height);
+		g.ellipse(getX(), getY(), getWidth(), height);
 	}
 
 	@Override

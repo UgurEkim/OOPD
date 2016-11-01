@@ -7,14 +7,7 @@ public class AddHealth extends Powerup {
 	}
 
 	@Override
-	protected void effect() {
+	public void effect() {
 		player.resetHealth();
 	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

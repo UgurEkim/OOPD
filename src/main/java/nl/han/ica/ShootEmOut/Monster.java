@@ -14,25 +14,25 @@ public abstract class Monster extends SpriteObject {
 	public Monster(String fileName, ShootEmOut SEO) {
 		super(new Sprite(fileName));
 		this.SEO = SEO;
-		this.setY(-50);   
+		setY(-50);   
 	}
 
 	protected void setxPosition() {
 		Random random = new Random();
 		float spawnX = random.nextInt(SEO.getWidth());
-		if (spawnX > SEO.getWidth() - this.width * 2) {
-			spawnX = SEO.getWidth() - this.width * 2;
+		if (spawnX > SEO.getWidth() - getWidth() * 2) {
+			spawnX = SEO.getWidth() - getWidth() * 2;
 		}
-		this.setX(spawnX);
+		setX(spawnX);
 	}
 
-	protected void removeHealth() {
+	public void removeHealth() {
 		if (this instanceof Boss) {
 			if (((Boss) this).getCanHit()) {
-				this.setHealth(this.getHealth() - 1);
+				setHealth(getHealth() - 1);
 			}
 		} else {
-			this.setHealth(this.getHealth() - 1);
+			setHealth(getHealth() - 1);
 		}
 
 		if (getHealth() == 0) {
@@ -43,7 +43,7 @@ public abstract class Monster extends SpriteObject {
 		}
 	}
 
-	protected abstract void kill();
+	public abstract void kill();
 
 	private void spawnPowerup() {
 		Random r = new Random();
@@ -53,19 +53,19 @@ public abstract class Monster extends SpriteObject {
 
 		switch (rPowerup) {
 		case 0:
-			pUp = new AttackType(SEO, this.getX(), this.getY());
+			pUp = new AttackType(SEO, getX(), getY());
 			SEO.addGameObject(pUp);
 			break;
 		case 1:
-			pUp = new AttackSpeed(SEO, this.getX(), this.getY());
+			pUp = new AttackSpeed(SEO, getX(), getY());
 			SEO.addGameObject(pUp);
 			break;
 		case 2:
-			pUp = new Shield(SEO, this.getX(), this.getY(), 5.0);
+			pUp = new Shield(SEO, getX(), getY(), 5.0);
 			SEO.addGameObject(pUp);
 			break;
 		case 3:
-			pUp = new AddHealth(SEO, this.getX(), this.getY());
+			pUp = new AddHealth(SEO, getX(), getY());
 			SEO.addGameObject(pUp);
 			break;
 
@@ -76,12 +76,12 @@ public abstract class Monster extends SpriteObject {
 
 	@Override
 	public void update() {
-		if (this.getY() >= SEO.screenHeight) {
+		if (getY() >= SEO.screenHeight) {
 			kill();
 		}
 	}
 
-	protected int getHealth() {
+	private int getHealth() {
 		return health;
 	}
 
@@ -89,15 +89,11 @@ public abstract class Monster extends SpriteObject {
 		this.health = health;
 	}
 
-	protected double getAttackInterval() {
-		return attackInterval;
-	}
-
 	protected void setAttackInterval(double attackInterval) {
 		this.attackInterval = attackInterval;
 	}
 
-	protected int getScoreValue() {
+	public int getScoreValue() {
 		return scoreValue;
 	}
 

@@ -15,25 +15,21 @@ public class Button extends GameObject implements IMouseInput {
 		this.SEO = SEO;
 		this.text = text;
 	}
-
-	@Override
-	public void update() {
-
-	}
 	
 	@Override
 	public void draw(PGraphics g) {
 		g.rectMode(PConstants.CENTER);
 		g.fill(80, 200, 80);
-		g.rect(x, y, width, height);
+		g.rect(getX(), getY(), getWidth(), getHeight());
 		g.fill(255);
 		g.textAlign(PConstants.CENTER, PConstants.CENTER);
 		g.textSize(40);
-		g.text(text, x, y);
+		g.text(text, getX(), getY());
 	}
 
 	private boolean isMuisBinnen(float mouseX, float mouseY) {
-		if (mouseX > x - width / 2 && mouseX < x + width / 2 && mouseY > y - height / 2 && mouseY < y + height / 2) {
+		if (mouseX > getX() - getWidth() / 2 && mouseX < getX() + getWidth() / 2 && 
+				mouseY > getY() - getHeight() / 2 && mouseY < getY() + getHeight() / 2) {
 			return true;
 		}
 		return false;
@@ -46,7 +42,12 @@ public class Button extends GameObject implements IMouseInput {
 		}
 	}
 
-	protected String getText() {
+	public String getText() {
 		return text;
+	}
+
+	@Override
+	public void update() {
+		
 	}
 }

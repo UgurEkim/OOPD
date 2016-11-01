@@ -14,14 +14,14 @@ public class Health extends GameObject {
 	private ShootEmOut SEO;
 	
 	public Health(int bar, int lives, Player player, ShootEmOut SEO) {
-		this.setBar(bar);
-		this.setMax(bar);
-		this.setLives(lives);
+		setBar(bar);
+		setMax(bar);
+		setLives(lives);
 		this.player = player;
 		this.SEO = SEO;
 	}
 
-	protected void removeLife() {
+	private void removeLife() {
 		setLives(getLives() - 1);
 		SEO.playLoselifeSound();
 		
@@ -30,13 +30,13 @@ public class Health extends GameObject {
 		}
 	}
 
-	protected void removeBar() {
+	public void removeBar() {
 		setBar(getBar() - 1);
 
 		if (getBar() == 0) {
 			removeLife();
 			if (getLives() >= 0) {
-				setBar(max);
+				setBar(getMax());
 			}
 		}
 	}
@@ -75,23 +75,26 @@ public class Health extends GameObject {
 		}
 	}
 
-	protected void resetBar() {
+	/*
+	 * Reset the bar to max (used when picking up the addhealth powerup
+	 */
+	public void resetBar() {
 		this.bar = max;
 	}
 
-	protected int getMax() {
+	private int getMax() {
 		return max;
 	}
 
-	protected void setMax(int max) {
+	private void setMax(int max) {
 		this.max = max;
 	}
 
-	protected int getBar() {
+	private int getBar() {
 		return bar;
 	}
 
-	protected void setBar(int bar) {
+	private void setBar(int bar) {
 		if (bar >= 0) {
 			this.bar = bar;
 		} else {
@@ -99,11 +102,11 @@ public class Health extends GameObject {
 		}
 	}
 
-	protected int getLives() {
+	private int getLives() {
 		return lives;
 	}
 
-	protected void setLives(int lives) {
+	private void setLives(int lives) {
 		if (lives >= 0) {
 			this.lives = lives;
 		} else {

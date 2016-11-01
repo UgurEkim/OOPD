@@ -51,7 +51,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		highscores = new ArrayList<TextObject>();
 
 		initializeSound();
-		setScore(0);
 		createView();
 		initMenu();		
 	}
@@ -72,13 +71,13 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		size(screenWidth, screenHeight);
 	}
 
-	protected void initMenu() {
+	private void initMenu() {
 		addButton("Start", screenWidth / 2, 300);
 		addButton("Highscore", screenWidth / 2, 500);
 		
 	}
 
-	protected void removeMenu(Button buttonClicked) {
+	public void removeMenu(Button buttonClicked) {
 		switch (buttonClicked.getText()) {
 		case "Restart":
 		case "Start":
@@ -87,6 +86,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 			addGameObject(player);
 			level = 1;
 			spawnInterval = 1;
+			score = 0;
 			monsterSpawner();
 			levelTimeAlarmReset();
 			createDashboard(250, 20, screenWidth, 100, "Score: " + getScore());
@@ -135,11 +135,8 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		levelTimeAlarm.addTarget(this);
 		levelTimeAlarm.start();
 	}
-
-	/*
-	 * Spawns boss
-	 */
-	public void spawnBoss() {
+	
+	private void spawnBoss() {
 		monsterAlarm.stop();
 		addGameObject(new Boss(this));
 	}
@@ -179,9 +176,9 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	}
 
 	/*
-	 * Resets the game, adds current score to highscore list
+	 * Removes all gameobjects, stops all alarms and sets all variables back to normal, adds current score to highscore list
 	 */
-	protected void gameOver() {
+	public void gameOver() {
 		deleteAllGameOBjects();
 		
 		TextObject t = new TextObject(Integer.toString(getScore()), 24);
@@ -189,13 +186,12 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		
 		monsterAlarm.stop();
 		levelTimeAlarm.stop();
-		setScore(0);
-		level = 1;
-		spawnInterval = 1;
 
-		addButton("Restart", screenWidth / 2, 300);
-		addButton("Highscore", screenWidth / 2, 500);
-
+		//addButton("Restart", screenWidth / 2, 300);
+		//addButton("Highscore", screenWidth / 2, 500);
+		initMenu();
+		
+		
 		createDashboard(135, 100, screenWidth, screenHeight, "Game Over!");
 
 	}
@@ -210,7 +206,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	 * 
 	 * @param int value
 	 */
-	protected void addScore(int value) {
+	public void addScore(int value) {
 		this.score = this.score + value;
 		scoreDashboard.setText("Score: " + score);
 	}
@@ -218,7 +214,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	/*
 	 * Go to next level and increase game stats.
 	 */
-	protected void nextLevel() {
+	public void nextLevel() {
 		this.level += 1;
 		this.spawnInterval = 1;
 		monsterSpawner();
@@ -227,9 +223,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		levelupSound.play();
 	}
 
-	/*
-	 * Initialize all sound files
-	 */
 	private void initializeSound() {
 		backgroundmusic = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/bgm.mp3");
 		backgroundmusic.loop(-1);
@@ -277,27 +270,19 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	
 	
-	protected int getLevel() {
+	public int getLevel() {
 		return level;
 	}
 	
-	protected int getScore() {
+	public int getScore() {
 		return score;
 	}
 	
-	protected void setScore(int score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
-
-	protected float getPlayerX() {
-		return player.getX();
-	}
-
-	protected float getPlayerY() {
-		return player.getY();
-	}
-
-	protected Player getPlayer() {
+	
+	public Player getPlayer() {
 		return player;
 	}
 }
