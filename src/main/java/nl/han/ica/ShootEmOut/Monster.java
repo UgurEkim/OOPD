@@ -9,10 +9,8 @@ public abstract class Monster extends SpriteObject {
 	protected int health;
 	protected ShootEmOut SEO;
 	protected double attackInterval;
-	protected int attackAmount;
 	protected int scoreValue;
-	protected int attackDamage;
-
+	
 	public Monster(String fileName, ShootEmOut SEO) {
 		super(new Sprite(fileName));
 		this.SEO = SEO;
@@ -99,27 +97,11 @@ public abstract class Monster extends SpriteObject {
 		this.attackInterval = attackInterval;
 	}
 
-	protected int getAttackAmount() {
-		return attackAmount;
-	}
-
-	protected void setAttackAmount(int attackAmount) {
-		this.attackAmount = attackAmount;
-	}
-
 	protected int getScoreValue() {
 		return scoreValue;
 	}
 
 	protected void setScoreValue(int scoreValue) {
 		this.scoreValue = scoreValue;
-	}
-
-	protected int getAttackDamage() {
-		return attackDamage;
-	}
-
-	protected void setAttackDamage(int attackDamage) {
-		this.attackDamage = attackDamage;
 	}
 }
