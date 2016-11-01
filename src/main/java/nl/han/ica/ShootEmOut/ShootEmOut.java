@@ -37,7 +37,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	protected int screenWidth;
 	protected int screenHeight;
 
-	private int spawnSpeed;
+	private int spawnInterval;
 	private int level;
 
 	public static void main(String[] args) {
@@ -78,10 +78,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		
 	}
 
-	protected int getLevel() {
-		return level;
-	}
-
 	protected void removeMenu(Button buttonClicked) {
 		switch (buttonClicked.getText()) {
 		case "Restart":
@@ -90,7 +86,7 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 			player = new Player(this, screenWidth / 2 - 26);
 			addGameObject(player);
 			level = 1;
-			spawnSpeed = 1;
+			spawnInterval = 1;
 			monsterSpawner();
 			levelTimeAlarmReset();
 			createDashboard(250, 20, screenWidth, 100, "Score: " + getScore());
@@ -122,11 +118,11 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	}
 
 	/*
-	 * Spawn monster objects.
+	 * Spawn a monster object depending on the level and spawnInterval
 	 */
 	public void monsterSpawner() {
 		Random random = new Random();
-		monsterAlarm = new Alarm("Monster", random.nextDouble() * (5.0 / (spawnSpeed + (level * 2))));
+		monsterAlarm = new Alarm("Monster", random.nextDouble() * (5.0 / (spawnInterval + (level * 2))));
 		monsterAlarm.addTarget(this);
 		monsterAlarm.start();
 	}
@@ -173,8 +169,8 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		}
 
 		if (alarmName == "Time") {
-			setSpawnSpeed(getSpawnSpeed() + 1);
-			if (getSpawnSpeed() >= 5) {
+			spawnInterval += 1;
+			if (spawnInterval >= 5) {
 				spawnBoss();
 			} else {
 				levelTimeAlarmReset();
@@ -194,8 +190,8 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		monsterAlarm.stop();
 		levelTimeAlarm.stop();
 		setScore(0);
-		setLevel(1);
-		setSpawnSpeed(1);
+		level = 1;
+		spawnInterval = 1;
 
 		addButton("Restart", screenWidth / 2, 300);
 		addButton("Highscore", screenWidth / 2, 500);
@@ -223,8 +219,8 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	 * Go to next level and increase game stats.
 	 */
 	protected void nextLevel() {
-		setLevel(getLevel() + 1);
-		setSpawnSpeed(1);
+		this.level += 1;
+		this.spawnInterval = 1;
 		monsterSpawner();
 		levelTimeAlarmReset();
 		levelupSound.rewind();
@@ -279,9 +275,12 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		killEnemySound.play();
 	}
 
-	/*
-	 * Getters and setters
-	 */
+	
+	
+	protected int getLevel() {
+		return level;
+	}
+	
 	protected int getScore() {
 		return score;
 	}
@@ -296,18 +295,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	protected float getPlayerY() {
 		return player.getY();
-	}
-
-	private int getSpawnSpeed() {
-		return spawnSpeed;
-	}
-
-	private void setSpawnSpeed(int spawnSpeed) {
-		this.spawnSpeed = spawnSpeed;
-	}
-
-	private void setLevel(int level) {
-		this.level = level;
 	}
 
 	protected Player getPlayer() {
