@@ -26,6 +26,10 @@ public abstract class Monster extends SpriteObject {
 		setX(spawnX);
 	}
 
+	/*
+	 * Removes health from Boss. If health is 0 then kill
+	 * object, play sound, add score and spawn powerup object.
+	 */
 	public void removeHealth() {
 		if (this instanceof Boss) {
 			if (((Boss) this).getCanHit()) {

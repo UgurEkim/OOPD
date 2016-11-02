@@ -22,7 +22,11 @@ public class Boss extends Monster implements IAlarmListener {
 		setScoreValue(450 * SEO.getLevel());
 		this.canHit = false;
 	}
-
+	
+	/*
+	 * Stops alarm, deletes the game object and if player is not dead,
+	 * go to next level.
+	 */
 	public void kill() {
 		stopAlarm();
 		SEO.deleteGameObject(this);

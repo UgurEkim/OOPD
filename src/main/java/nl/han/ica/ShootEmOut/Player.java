@@ -129,12 +129,19 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		alarm.start();
 	}
 
+	/*
+	 * If player doesnt have shield powerup (can not be hit)
+	 * then remove life bar.
+	 */
 	public void removeHealth() {
 		if (!isShield()) {
 			health.removeBar();
 		}
 	}
 
+	/*
+	 * Resets health bar back to the maximum.
+	 */
 	public void resetHealth() {
 		health.resetBar();
 	}
@@ -157,6 +164,11 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 		}
 	}
 	
+	/*
+	 * Checks if player is alive
+	 * 
+	 * @return boolean
+	 */
 	public boolean isDead(){
 		return health.isDead();
 	}

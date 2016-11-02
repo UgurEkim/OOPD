@@ -26,6 +26,9 @@ public class Slime extends Monster implements IAlarmListener {
 		SEO.addGameObject(attack);
 	}
 
+	/*
+	 * Stops alarm and delete game object.
+	 */
 	public void kill() {
 		stopAlarm();
 		SEO.deleteGameObject(this);
@@ -48,6 +51,9 @@ public class Slime extends Monster implements IAlarmListener {
 		alarm.start();
 	}
 
+	/*
+	 * Stops alarm
+	 */
 	public void stopAlarm() {
 		alarm.stop();
 	}

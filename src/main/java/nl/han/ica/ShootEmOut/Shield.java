@@ -12,6 +12,10 @@ public class Shield extends Powerup implements IAlarmListener {
 		alarm = new Alarm("Shield", duration);
 	}
 
+	/*
+	 * Set player shield boolean to true and add this
+	 * to IAlarmListener targetlist after that start alarm.
+	 */
 	@Override
 	public void effect() {
 		player.setShield(true);

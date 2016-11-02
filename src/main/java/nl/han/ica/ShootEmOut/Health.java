@@ -30,6 +30,10 @@ public class Health extends GameObject {
 		}
 	}
 
+	/*
+	 * Removes a life bar from your total life bars.
+	 * If life bar is 0, removes 1 life.
+	 */
 	public void removeBar() {
 		setBar(getBar() - 1);
 
@@ -41,6 +45,11 @@ public class Health extends GameObject {
 		}
 	}
 	
+	/*
+	 * Checks if bar and lives are lower then 0.
+	 * If yes, return true (dead) else false (alive)
+	 * @return boolean
+	 */
 	public boolean isDead(){
 		if (getBar() <= 0 && getLives() < 0) {
 			return true;

@@ -6,6 +6,9 @@ public class AttackType extends Powerup {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/attacktype.png", SEO, x, y);
 	}
 
+	/*
+	 * Set player attacktype to attacktype + 1
+	 */
 	@Override
 	public void effect() {
 		player.setAttackType(player.getAttackType() + 1);

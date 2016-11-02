@@ -77,6 +77,12 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		
 	}
 
+	/*
+	 * Removes menu after button is clicked. After that init
+	 * new screen based on the button you clicked.
+	 *  
+	 * @param Button buttonClicked
+	 */
 	public void removeMenu(Button buttonClicked) {
 		switch (buttonClicked.getText()) {
 		case "Restart":

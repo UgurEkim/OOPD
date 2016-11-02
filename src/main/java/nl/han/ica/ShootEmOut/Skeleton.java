@@ -38,6 +38,9 @@ public class Skeleton extends Monster implements IAlarmListener {
 		}
 	}
 	
+	/*
+	 * Stops alarm and deletes game object.
+	 */
 	public void kill(){
 		stopAlarm();
 		SEO.deleteGameObject(this);
@@ -49,6 +52,9 @@ public class Skeleton extends Monster implements IAlarmListener {
 		alarm.start();
 	}
 
+	/*
+	 * Stops alarm
+	 */
 	public void stopAlarm() {
 		alarm.stop();
 	}

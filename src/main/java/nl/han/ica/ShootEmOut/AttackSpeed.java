@@ -6,6 +6,9 @@ public class AttackSpeed extends Powerup {
 		super("src/main/java/nl/han/ica/ShootEmOut/media/attackspeed.png", SEO, x, y);
 	}
 
+	/*
+	 * Set player attack speed interval.
+	 */
 	@Override
 	public void effect() {
 		player.setAttackSpeedInterval(player.getAttackSpeedInterval() * 0.85);
