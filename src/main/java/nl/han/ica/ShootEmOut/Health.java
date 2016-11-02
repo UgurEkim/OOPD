@@ -23,7 +23,6 @@ public class Health extends GameObject {
 
 	private void removeLife() {
 		setLives(getLives() - 1);
-		SEO.playLoselifeSound();
 		
 		if(isDead()){
 			SEO.gameOver();

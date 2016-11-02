@@ -41,7 +41,6 @@ public abstract class Monster extends SpriteObject {
 
 		if (getHealth() == 0) {
 			kill();
-			SEO.playKillEnemySound();
 			SEO.addScore(getScoreValue());
 			spawnPowerup();
 		}

@@ -15,4 +15,9 @@ public class Score {
 	public int getScore() {
 		return score;
 	}
+	
+	@Override
+	public String toString(){
+		return Integer.toString(score);
+	}
 }

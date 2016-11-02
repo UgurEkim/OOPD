@@ -158,7 +158,6 @@ public class Player extends SpriteObject implements ICollidableWithGameObjects, 
 				((Powerup) g).setPlayer(this);
 				((Powerup) g).effect();
 
-				SEO.playPowerupSound();
 				SEO.deleteGameObject(g);
 			}
 		}

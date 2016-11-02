@@ -21,8 +21,6 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		this.color[0] = 255;
 		this.color[1] = 255;
 		this.color[2] = 0;
-		
-		SEO.playAttackSound();
 	}
 
 	public Attack(ShootEmOut SEO, int[] rgb, float x, float y, int attackSpeed, float direction, int size) {
@@ -30,9 +28,7 @@ public class Attack extends GameObject implements ICollidableWithGameObjects {
 		this.SEO = SEO;
 		this.color = rgb;
 		setDirection(direction);
-		setDirectionSpeed(direction, attackSpeed);
-		
-		SEO.playEnemyAttackSound();
+		setDirectionSpeed(direction, attackSpeed*SEO.getLevel());
 	}
 
 	@Override
