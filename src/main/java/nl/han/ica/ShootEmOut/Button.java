@@ -5,16 +5,16 @@ import nl.han.ica.OOPDProcessingEngineHAN.UserInput.IMouseInput;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 
-public class Button extends GameObject implements IMouseInput {
+public abstract class Button extends GameObject implements IMouseInput {
 
 	private String text;
-	private ShootEmOut SEO;
 
-	public Button(ShootEmOut SEO, float x, float y, String text) {
+	public Button(float x, float y, String text) {
 		super(x, y, 300, 150);
-		this.SEO = SEO;
 		this.text = text;
 	}
+	
+	protected abstract void clicked();
 	
 	@Override
 	public void draw(PGraphics g) {
@@ -38,7 +38,7 @@ public class Button extends GameObject implements IMouseInput {
 	@Override
 	public void mouseClicked(int x, int y, int button) {
 		if (isMuisBinnen(x, y) && button == PConstants.LEFT) {
-			SEO.removeMenu(this);
+			clicked();
 		}
 	}
 

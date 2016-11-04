@@ -21,12 +21,13 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	private Alarm levelTimeAlarm;
 
 	private Sound backgroundmusic;
-	
+
 	private ArrayList<Score> highscores;
+	private ArrayList<Button> buttons;
 
 	private TextObject scoreDashboard;
 
-	private Score score;
+	protected Score score;
 
 	protected int screenWidth;
 	protected int screenHeight;
@@ -43,13 +44,15 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		screenWidth = 700;
 		screenHeight = 800;
 		highscores = new ArrayList<Score>();
+		buttons = new ArrayList<Button>();
+		
 
 		initializeSound();
 		createView();
 		initMenu();
 	}
 
-	private void createDashboard(int x, int y, int width, int height, String text) {
+	protected void createDashboard(int x, int y, int width, int height, String text) {
 		Dashboard dashboard = new Dashboard(x, y, width, height);
 		scoreDashboard = new TextObject(text, 24);
 		scoreDashboard.setForeColor(255, 255, 255, 255);
@@ -65,54 +68,32 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		size(screenWidth, screenHeight);
 	}
 
-	private void initMenu() {
-		addButton("Start", screenWidth / 2, 300);
-		addButton("Highscore", screenWidth / 2, 500);
-
+	public void initMenu() {
+		clearButtons();
+		Button button;
+		
+		button = new StartButton(this, 300);
+		addButton(button);
+		
+		button = new HighscoreButton(this, 500);
+		addButton(button);
+		
+		initButtons();
 	}
 
-	/*
-	 * Removes menu after button is clicked. After that init new screen based on
-	 * the button you clicked.
-	 * 
-	 * @param Button buttonClicked
-	 */
-	public void removeMenu(Button buttonClicked) {
-		switch (buttonClicked.getText()) {
-		case "Restart":
-		case "Start":
-			deleteAllGameOBjects();
-			player = new Player(this, screenWidth / 2 - 26);
-			addGameObject(player);
-			level = 1;
-			spawnInterval = 1;
-			score = new Score();
-			monsterSpawner();
-			levelTimeAlarmReset();
-			createDashboard(250, 20, screenWidth, 100, "Score: " + score.getScore());
-			break;
+	public void addButton(Button button) {
+		buttons.add(button);
+	}
 
-		case "Highscore":
-			deleteAllGameOBjects();
-			addButton("Back", screenWidth / 2, 450);
+	protected void initButtons() {
+		for (Button button : buttons) {
+			addGameObject(button, button.getX(), button.getY());
+		}
+	}
 
-			if (!highscores.isEmpty()) {
-				for (int i = 0; i < highscores.size(); i++) {
-					createDashboard(150, 50 + (i * 20), screenWidth, screenHeight, highscores.get(i).toString());
-				}
-			} else {
-				createDashboard(125, 150, screenWidth, screenHeight, "No highscores");
-			}
-			break;
-
-		case "Back":
-			deleteAllGameOBjects();
-			initMenu();
-			break;
-
-		default:
-			break;
-
+	public void clearButtons() {
+		if (!buttons.isEmpty()) {
+			buttons.clear();
 		}
 	}
 
@@ -186,17 +167,10 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		monsterAlarm.stop();
 		levelTimeAlarm.stop();
 
-		// addButton("Restart", screenWidth / 2, 300);
-		// addButton("Highscore", screenWidth / 2, 500);
 		initMenu();
 
 		createDashboard(135, 100, screenWidth, screenHeight, "Game Over!");
 
-	}
-
-	private void addButton(String text, int x, int y) {
-		Button button = new Button(this, x, y, text);
-		addGameObject(button, button.getX(), button.getY());
 	}
 
 	/*
@@ -235,5 +209,21 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	public Player getPlayer() {
 		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	protected void setLevel(int level) {
+		this.level = level;
+	}
+
+	protected void setSpawnInterval(int spawnInterval) {
+		this.spawnInterval = spawnInterval;
+	}
+
+	public ArrayList<Score> getHighscores() {
+		return highscores;
 	}
 }
