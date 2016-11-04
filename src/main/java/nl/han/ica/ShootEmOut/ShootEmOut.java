@@ -8,7 +8,6 @@ import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Dashboard.Dashboard;
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.TextObject;
-import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
@@ -19,8 +18,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 
 	private Alarm monsterAlarm;
 	private Alarm levelTimeAlarm;
-
-	private Sound backgroundmusic;
 
 	private ArrayList<Score> highscores;
 	private ArrayList<Button> buttons;
@@ -46,8 +43,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		highscores = new ArrayList<Score>();
 		buttons = new ArrayList<Button>();
 		
-
-		initializeSound();
 		createView();
 		initMenu();
 	}
@@ -191,11 +186,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		this.spawnInterval = 1;
 		monsterSpawner();
 		levelTimeAlarmReset();
-	}
-
-	private void initializeSound() {
-		backgroundmusic = new Sound(this, "src/main/java/nl/han/ica/ShootEmOut/media/bgm.mp3");
-		backgroundmusic.loop(-1);
 	}
 
 	@Override
