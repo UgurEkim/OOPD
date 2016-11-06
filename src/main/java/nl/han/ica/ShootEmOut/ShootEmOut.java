@@ -20,7 +20,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	private Alarm levelTimeAlarm;
 
 	private ArrayList<Score> highscores;
-	private ArrayList<Button> buttons;
 
 	private TextObject scoreDashboard;
 
@@ -41,7 +40,6 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 		screenWidth = 700;
 		screenHeight = 800;
 		highscores = new ArrayList<Score>();
-		buttons = new ArrayList<Button>();
 		
 		createView();
 		initMenu();
@@ -64,32 +62,12 @@ public class ShootEmOut extends GameEngine implements IAlarmListener {
 	}
 
 	public void initMenu() {
-		clearButtons();
-		Button button;
-		
-		button = new StartButton(this, 300);
-		addButton(button);
-		
-		button = new HighscoreButton(this, 500);
-		addButton(button);
-		
-		initButtons();
+		addButton(new StartButton(this, 300));
+		addButton(new HighscoreButton(this, 500));
 	}
 
 	public void addButton(Button button) {
-		buttons.add(button);
-	}
-
-	protected void initButtons() {
-		for (Button button : buttons) {
-			addGameObject(button, button.getX(), button.getY());
-		}
-	}
-
-	public void clearButtons() {
-		if (!buttons.isEmpty()) {
-			buttons.clear();
-		}
+		addGameObject(button, button.getX(), button.getY());
 	}
 
 	/*

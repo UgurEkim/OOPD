@@ -7,11 +7,13 @@ import processing.core.PGraphics;
 
 public abstract class Button extends GameObject implements IMouseInput {
 
+	protected ShootEmOut SEO;
 	private String text;
 
-	public Button(float x, float y, String text) {
+	public Button(ShootEmOut SEO, float x, float y, String text) {
 		super(x, y, 300, 150);
 		this.text = text;
+		this.SEO = SEO;
 	}
 	
 	protected abstract void clicked();

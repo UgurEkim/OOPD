@@ -1,21 +1,15 @@
 package nl.han.ica.ShootEmOut;
 
 public class HighscoreButton extends Button {
-
-	private ShootEmOut SEO;
 	
 	public HighscoreButton(ShootEmOut SEO, float y) {
-		super(SEO.screenWidth / 2, y, "Highscore");
-		this.SEO = SEO;
+		super(SEO, SEO.screenWidth / 2, y, "Highscore");
 	}
 	
 	@Override
 	public void clicked() {
 		SEO.deleteAllGameOBjects();
-		SEO.clearButtons();
-		Button button = new BackButton(SEO, 700);
-		SEO.addButton(button);
-		SEO.initButtons();
+		SEO.addButton(new BackButton(SEO, 700));
 		
 		if (!SEO.getHighscores().isEmpty()) {
 			for (int i = 0; i < SEO.getHighscores().size(); i++) {

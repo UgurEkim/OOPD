@@ -2,11 +2,8 @@ package nl.han.ica.ShootEmOut;
 
 public class StartButton extends Button {
 	
-	private ShootEmOut SEO;
-	
 	public StartButton(ShootEmOut SEO, float y) {
-		super(SEO.screenWidth / 2, y, "Start");
-		this.SEO = SEO;
+		super(SEO, SEO.screenWidth / 2, y, "Start");
 	}
 	
 	@Override
