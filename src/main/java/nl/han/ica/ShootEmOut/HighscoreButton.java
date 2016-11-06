@@ -13,7 +13,7 @@ public class HighscoreButton extends Button {
 	public void clicked() {
 		SEO.deleteAllGameOBjects();
 		SEO.clearButtons();
-		Button button = new BackButton(SEO, 500);
+		Button button = new BackButton(SEO, 700);
 		SEO.addButton(button);
 		SEO.initButtons();
 		
